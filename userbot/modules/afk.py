@@ -244,8 +244,8 @@ async def type_afk_is_not_true(notafk):
 
 CMD_HELP.update({
     "afk":
-    ">`.afk [Optional Reason]`"
-    "\nUsage: Sets you as afk.\nReplies to anyone who tags/PM's "
-    "you telling them that you are AFK(reason)."
-    "\n\nSwitches off AFK when you type back anything, anywhere."
+    "• `.afk <reason (optional)>`\n"
+    "Usage: Sets you as AFK. Replies to anyone who tags/PM's "
+    "you telling them that you are AFK (with reason). "
+    "Switches off AFK when you type back anything, anywhere."
 })

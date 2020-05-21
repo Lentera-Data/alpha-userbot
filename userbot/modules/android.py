@@ -298,16 +298,16 @@ async def twrp(request):
 
 CMD_HELP.update({
     "android":
-    ">`.magisk`"
-    "\nGet latest Magisk releases"
-    "\n\n>`.device <codename>`"
-    "\nUsage: Get info about android device codename or model."
-    "\n\n>`.codename <brand> <device>`"
-    "\nUsage: Search for android device codename."
-    "\n\n>`.pixeldl` **<download.pixelexperience.org>**"
-    "\nUsage: Download pixel experience ROM into your userbot server."
-    "\n\n>`.specs <brand> <device>`"
-    "\nUsage: Get device specifications info."
-    "\n\n>`.twrp <codename>`"
-    "\nUsage: Get latest twrp download for android device."
+    "• `.magisk`\n"
+    "Usage: Get latest Magisk releases.\n\n"
+    "• `.device <codename>`\n"
+    "Usage: Get info about android device codename or model.\n\n"
+    "• `.codename <brand> <device>`\n"
+    "Usage: Search for android device codename.\n\n"
+    "• `.pixeldl` **<download.pixelexperience.org/..>**\n"
+    "Usage: Download Pixel Experience ROM into your server.\n\n"
+    "• `.specs <brand> <device>`\n"
+    "Usage: Get device specifications info.\n\n"
+    "• `.twrp <codename>`\n"
+    "Usage: Get latest TWRP releases for android device."
 })
