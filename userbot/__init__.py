@@ -53,7 +53,6 @@ if CONFIG_CHECK:
 API_KEY = os.environ.get("API_KEY", None)
 API_HASH = os.environ.get("API_HASH", None)
 
-
 # Userbot Session String
 STRING_SESSION = os.environ.get("STRING_SESSION", None)
 
@@ -71,11 +70,11 @@ PM_AUTO_BAN = sb(os.environ.get("PM_AUTO_BAN", "False"))
 HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)
 HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
 
-# Custom (forked) repo URL for updater.
+# Custom repo URL for updater.
 UPSTREAM_REPO_URL = os.environ.get(
     "UPSTREAM_REPO_URL",
-    "https://github.com/adekmaulana/ProjectBish.git")
-# UPSTREAM_REPO_URL branch, the default is master
+    "https://github.com/rulim34/userbot.git")
+# Custom repo branch, the default is master
 UPSTREAM_REPO_BRANCH = os.environ.get(
     "UPSTREAM_REPO_BRANCH", "master")
 
@@ -90,9 +89,6 @@ OCR_SPACE_API_KEY = os.environ.get("OCR_SPACE_API_KEY", None)
 
 # Telegraph
 TELEGRAPH_SHORT_NAME = os.environ.get("TELEGRAPH_SHORT_NAME", None)
-
-# Default .alive name
-ALIVE_NAME = os.environ.get("ALIVE_NAME", None)
 
 # remove.bg API key
 REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY", None)

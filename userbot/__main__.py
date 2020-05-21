@@ -13,9 +13,9 @@ from userbot import LOGS, bot
 from userbot.modules import ALL_MODULES
 
 
-INVALID_PH = '\nERROR: The Phone No. entered is INVALID' \
-             '\n Tip: Use Country Code along with number.' \
-             '\n or check your phone number and try again !'
+INVALID_PH = '\nERROR: The phone no. entered is INVALID!' \
+             '\n  Tip: Use country code (eg +62) along with num.' \
+             '\n       Recheck your phone number and try again!'
 
 try:
     bot.start()
@@ -26,7 +26,8 @@ except PhoneNumberInvalidError:
 for module_name in ALL_MODULES:
     imported_module = import_module("userbot.modules." + module_name)
 
-LOGS.info("You are running ProjectBish UserBot version: [1.beta.5]")
+LOGS.info("You are running Alpha UserBot v1.0.6")
+LOGS.info("Test it by typing .alive on any chat.")
 
 if len(argv) not in (1, 3, 4):
     bot.disconnect()

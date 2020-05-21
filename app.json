@@ -1,6 +1,6 @@
 {
-  "name": "Project Bish UserBot",
-  "description": "[projectbish] A modular Telegram userbot running on Python 3.8",
+  "name": "Alpha UserBot",
+  "description": "A modular Telegram userbot running on Python 3.8+ with an sqlalchemy database",
   "keywords": [
     "telegram",
     "userbot",
@@ -8,42 +8,41 @@
     "modular",
     "productivity"
   ],
-  "repository": "https://github.com/adekmaulana/ProjectBish",
-  "website": "https://telegra.ph/How-to-host-a-Telegram-Userbot-11-02",
+  "repository": "https://github.com/rulim34/userbot",
   "stack": "container",
   "env": {
     "API_KEY": {
-      "description": "Get this value from my.telegram.org.",
+      "description": "Get this value from https://my.telegram.org.",
       "required": true
     },
     "API_HASH": {
-      "description": "Get this value from my.telegram.org.",
+      "description": "Get this value from https://my.telegram.org.",
       "required": true
     },
     "STRING_SESSION": {
-      "description": "Get this value by running [python3 string_session.py] in Termux or local system.",
+      "description": "Get this value by running 'python3 generate_string_session.py' in Termux or local system.",
       "required": true
     },
     "HEROKU_API_KEY": {
-      "description": "Your Heroku API key, get it from 'https://dashboard.heroku.com/account'",
+      "description": "Heroku API key. Get this value from https://dashboard.heroku.com/account.",
       "value": "",
       "required": true
     },
     "HEROKU_APP_NAME": {
-      "description": "Add the Heroku app name here. It helps with userbot updates.",
+      "description": "Heroku app name. It helps with userbot updates.",
       "value": "",
       "required": true
     },
     "UPSTREAM_REPO_URL": {
-      "description": "In case you maintain a fork, add your repo URL here.",
+      "description": "Custom repo URL, in case you maintain a fork.",
       "required": false
     },
     "UPSTREAM_REPO_BRANCH": {
-      "description": "Default branch of your custom fork repo.",
+      "description": "Custom repo branch of your custom repo. Default is master",
       "required": false
     },
     "COUNTRY": {
-      "description": "Set your Country to be used in the .time and .date commands.",
+      "description": "Country name to be used in the .time and .date commands.",
       "required": false
     },
     "TZ_NUMBER": {
@@ -62,103 +61,103 @@
       "required": false
     },
     "OPEN_WEATHER_MAP_APPID": {
-      "description": "Get your own APPID (API key)from https://api.openweathermap.org/data/2.5/weather",
+      "description": "Weather APPID (API key). Get this value from https://api.openweathermap.org/data/2.5/weather.",
       "required": false
     },
     "BOTLOG": {
-      "description": "Incase you want to turn off logging, put this to false",
+      "description": "Bot logging. Set this to True if you want.",
       "value": "False"
     },
     "BOTLOG_CHATID": {
-      "description": "ChatID of the Log group. Set it to '0' if BOTLOG = False and/or if LOGSPAMMER = False.",
+      "description": "Chat ID of the bot log group. Set it to '0' if BOTLOG = False and LOGSPAMMER = False.",
       "value": "0"
     },
     "CONSOLE_LOGGER_VERBOSE": {
-      "description": "If you need verbosity on the console logging",
+      "description": "Console log verbosity, in case you need it.",
       "value": "False"
     },
     "PM_AUTO_BAN": {
-      "description": "PM Auto-Ban Feature Switch. Also known as the 'bleep blop, this is a bot...' module.",
+      "description": "PM Auto-Ban feature switch.",
       "value": "False"
     },
     "YOUTUBE_API_KEY": {
-      "description": "YouTube Data API Key for .yt command. Get from https://console.cloud.google.com",
+      "description": "YouTube API Key for .yt command. Get this value from https://console.cloud.google.com.",
       "required": false
     },
     "OCR_SPACE_API_KEY": {
-      "description": "OCR API Key for .ocr command. Get from https://ocr.space/ocrapi",
+      "description": "OCR API Key for .ocr command. Get this value from https://ocr.space/ocrapi.",
       "required": false
     },
     "REM_BG_API_KEY": {
-      "description": "API Key for .rbg command. Get from https://www.remove.bg/api",
+      "description": "API Key for .rbg command. Get this value from https://www.remove.bg/api.",
       "required": false
     },
     "ANTI_SPAMBOT": {
-      "description": "Kicks spambots from groups after they join. [Requires admin powers in groups to kick.]",
+      "description": "Kicks spambots from groups after they join (requires admin powers).",
       "value": "False"
     },
     "ANTI_SPAMBOT_SHOUT": {
-      "description": "Report spambots to @admins in groups after they join, just in case when you don't have admin powers to kick that shit yourself.",
+      "description": "Report spambots to groups @admins after they join, in case you don't have admin powers to kick that shit yourself.",
       "value": "False"
     },
     "TMP_DOWNLOAD_DIRECTORY": {
-      "description": "Download location for many modules (GDrive, .download etc..)",
+      "description": "Download location for many modules (GDrive, .download, etc).",
       "value": "./downloads/"
     },
     "CLEAN_WELCOME": {
-      "description": "When a new person joins, the old welcome message is deleted.",
+      "description": "Delete old welcome message when a new person joins.",
       "value": "True"
     },
     "LASTFM_API": {
-      "description": "API Key for Last.FM module. [Get one from - https://www.last.fm/api/account/create]",
+      "description": "Last.fm API Key. Get this value from https://www.last.fm/api/account/create.",
       "required": false
     },
     "LASTFM_SECRET": {
-      "description": "SECRET Key for Last.FM module. [Get one from - https://www.last.fm/api/account/create]",
+      "description": "Last.fm SECRET Key. Get this value from https://www.last.fm/api/account/create.",
       "required": false
     },
     "LASTFM_USERNAME": {
-      "description": "Last.FM Username",
+      "description": "Last.fm username",
       "required": false
     },
     "LASTFM_PASSWORD": {
-      "description": "Last.FM Password",
+      "description": "Last.fm password",
       "required": false
     },
     "BIO_PREFIX": {
-      "description": "Prefix for Last.FM Module Bio.",
+      "description": "Last.fm bio prefix.",
       "required": false
     },
     "DEFAULT_BIO": {
       "description": "Default profile bio.",
-      "value": "Hoooman",
+      "value": "Online",
       "required": false
     },
     "G_DRIVE_DATA": {
-      "description": "Your client_secret.json.",
+      "description": "Google Drive client_secret.json.",
       "required": false
     },
     "GENIUS_ACCESS_TOKEN": {
-      "description": "Client Access Token from https://genius.com/api-clients.",
+      "description": "Client Access Token. Get this value from https://genius.com/api-clients.",
       "required": false
     },
     "WEATHER_DEFCITY": {
-      "description": "Set the default city for the userbot's weather module.",
+      "description": "Default city for the userbot's weather module.",
       "required": false
     },
     "TELEGRAPH_SHORT_NAME": {
-      "description": "For telegraph module",
+      "description": "Short name for telegraph module",
       "value": "0",
       "required": true
     },
     "QUOTES_API_TOKEN": {
-      "description": "API for quotes module get it from http://antiddos.systems",
+      "description": "Quotes API. Get this value from http://antiddos.systems.",
       "value": "",
       "required": true
     },
     "LOGSPAMMER": {
-      "description": "Set this to True in case you want the error logs to be stored in the userbot log group, instead of spitting out the file in the current chat, requires a valid BOTLOG_CHATID to be set.",
-      "value": "True"
+      "description": "Stored error log in the bot log group, instead of spitting out the file in the current chat. Set this to True if you want (requires valid BOTLOG_CHATID).",
+      "value": "False"
     }
   },
   "addons": [
