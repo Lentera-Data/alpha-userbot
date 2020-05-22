@@ -205,6 +205,6 @@ async def get_markdown(reply):
 
 CMD_HELP.update({
     "stickerchat":
-    ">`.q`"
-    "\nUsage: Same as quotly, enhance ur text to sticker."
+    "• `.q`\n"
+    "Usage: Same as quotly, enhances your text to sticker."
 })

@@ -60,7 +60,7 @@ async def evaluate(query):
     if BOTLOG:
         await query.client.send_message(
             BOTLOG_CHATID,
-            f"Eval query {expression} was executed successfully")
+            f"Eval query `{expression}` was executed successfully")
 
 
 @register(outgoing=True, pattern=r"^.exec(?: |$)([\s\S]*)")
@@ -72,7 +72,7 @@ async def run(run_q):
         return await run_q.edit("`Exec isn't permitted on channels!`")
 
     if not code:
-        return await run_q.edit("``` At least a variable is required to"
+        return await run_q.edit("``` At least a variable is required to "
                                 "execute. Use .help exec for an example.```")
 
     if code in ("userbot.session", "config.env"):
@@ -122,7 +122,7 @@ async def run(run_q):
     if BOTLOG:
         await run_q.client.send_message(
             BOTLOG_CHATID,
-            "Exec query " + codepre + " was executed successfully")
+            f"Exec query `{codepre}` was executed successfully")
 
 
 @register(outgoing=True, pattern="^.term(?: |$)(.*)")
@@ -170,22 +170,22 @@ async def terminal_runner(term):
         await term.edit("`" f"{curruser}:~# {command}" f"\n{result}" "`")
     else:
         await term.edit("`" f"{curruser}:~$ {command}" f"\n{result}" "`")
-'''
+
     if BOTLOG:
         await term.client.send_message(
             BOTLOG_CHATID,
-            "Terminal Command " + command + " was executed sucessfully",
+            f"Terminal command `{command}` was executed",
         )
-'''
+
 
 CMD_HELP.update({
     "eval":
-    ">`.eval 2 + 3`"
-    "\nUsage: Evalute mini-expressions.",
+    "• `.eval 2 + 3`\n"
+    "Usage: Evalutes mini-expressions.",
     "exec":
-    ">`.exec print('hello')`"
-    "\nUsage: Execute small python scripts.",
+    "• `.exec print('hello')`\n"
+    "Usage: Executes small python scripts.",
     "term":
-    ">`.term <cmd>`"
-    "\nUsage: Run bash commands and scripts on your server."
+    "• `.term <cmd>`\n"
+    "Usage: Runs bash commands and scripts on your server."
 })

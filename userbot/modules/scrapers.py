@@ -38,16 +38,9 @@ from userbot.events import register
 from telethon.tl.types import DocumentAttributeAudio
 from userbot.utils import progress, chrome, googleimagesdownload
 
-CARBONLANG = "auto"
+CARBON_LANG = "auto"
 TTS_LANG = "en"
 TRT_LANG = "en"
-
-
-@register(outgoing=True, pattern="^.crblang (.*)")
-async def setlang(prog):
-    global CARBONLANG
-    CARBONLANG = prog.pattern_match.group(1)
-    await prog.edit(f"Language for carbon.now.sh set to {CARBONLANG}")
 
 
 @register(outgoing=True, pattern="^.carbon")
@@ -55,7 +48,7 @@ async def carbon_api(e):
     """ A Wrapper for carbon.now.sh """
     await e.edit("`Processing...`")
     CARBON = 'https://carbon.now.sh/?l={lang}&code={code}'
-    global CARBONLANG
+    global CARBON_LANG
     textx = await e.get_reply_message()
     pcode = e.text
     if pcode[8:]:
@@ -67,7 +60,7 @@ async def carbon_api(e):
     file_path = TEMP_DOWNLOAD_DIRECTORY + "carbon.png"
     if os.path.isfile(file_path):
         os.remove(file_path)
-    url = CARBON.format(code=code, lang=CARBONLANG)
+    url = CARBON.format(code=code, lang=CARBON_LANG)
     driver = await chrome()
     driver.get(url)
     await e.edit("`Processing...\n50%`")
@@ -83,8 +76,8 @@ async def carbon_api(e):
     await e.client.send_file(
         e.chat_id,
         file_path,
-        caption=("Made using [Carbon](https://carbon.now.sh/about/),"
-                 "\na project by [Dawn Labs](https://dawnlabs.io/)"),
+        caption=("Made using [Carbon](https://carbon.now.sh/about/),\n"
+                 "a project by [Dawn Labs](https://dawnlabs.io/)"),
         force_document=True,
         reply_to=e.message.reply_to_msg_id,
     )
@@ -249,50 +242,9 @@ async def urban_dict(ud_e):
         if BOTLOG:
             await ud_e.client.send_message(
                 BOTLOG_CHATID,
-                "ud query `" + query + "` executed successfully.")
+                "Urban Dictionary query `" + query + "` was executed successfully.")
     else:
         await ud_e.edit("No result found for **" + query + "**")
-
-
-@register(outgoing=True, pattern=r"^.tts(?: |$)([\s\S]*)")
-async def text_to_speech(query):
-    """ For .tts command, a wrapper for Google Text-to-Speech. """
-    textx = await query.get_reply_message()
-    message = query.pattern_match.group(1)
-    if message:
-        pass
-    elif textx:
-        message = textx.text
-    else:
-        return await query.edit(
-            "`Give a text or reply to a message for Text-to-Speech!`")
-
-    try:
-        gTTS(message, lang=TTS_LANG)
-    except AssertionError:
-        return await query.edit(
-            'The text is empty.\n'
-            'Nothing left to speak after pre-precessing, tokenizing and cleaning.'
-        )
-    except ValueError:
-        return await query.edit('Language is not supported.')
-    except RuntimeError:
-        return await query.edit('Error loading the languages dictionary.')
-    tts = gTTS(message, lang=TTS_LANG)
-    tts.save("k.mp3")
-    with open("k.mp3", "rb") as audio:
-        linelist = list(audio)
-        linecount = len(linelist)
-    if linecount == 1:
-        tts = gTTS(message, lang=TTS_LANG)
-        tts.save("k.mp3")
-    with open("k.mp3", "r"):
-        await query.client.send_file(query.chat_id, "k.mp3", voice_note=True)
-        os.remove("k.mp3")
-        if BOTLOG:
-            await query.client.send_message(
-                BOTLOG_CHATID, "Text to Speech executed successfully !")
-        await query.delete()
 
 
 # kanged from Blank-x ;---;
@@ -375,7 +327,48 @@ async def imdb(e):
                      link_preview=True,
                      parse_mode='HTML')
     except IndexError:
-        await e.edit("Plox enter **Valid movie name** kthx")
+        await e.edit("Please enter a **valid movie name**!")
+
+
+@register(outgoing=True, pattern=r"^.tts(?: |$)([\s\S]*)")
+async def text_to_speech(query):
+    """ For .tts command, a wrapper for Google Text-to-Speech. """
+    textx = await query.get_reply_message()
+    message = query.pattern_match.group(1)
+    if message:
+        pass
+    elif textx:
+        message = textx.text
+    else:
+        return await query.edit(
+            "`Give a text or reply to a message for Text-to-Speech!`")
+
+    try:
+        gTTS(message, lang=TTS_LANG)
+    except AssertionError:
+        return await query.edit(
+            'The text is empty.\n'
+            'Nothing left to speak after pre-precessing, tokenizing and cleaning.'
+        )
+    except ValueError:
+        return await query.edit('Language is not supported.')
+    except RuntimeError:
+        return await query.edit('Error loading the languages dictionary.')
+    tts = gTTS(message, lang=TTS_LANG)
+    tts.save("k.mp3")
+    with open("k.mp3", "rb") as audio:
+        linelist = list(audio)
+        linecount = len(linelist)
+    if linecount == 1:
+        tts = gTTS(message, lang=TTS_LANG)
+        tts.save("k.mp3")
+    with open("k.mp3", "r"):
+        await query.client.send_file(query.chat_id, "k.mp3", voice_note=True)
+        os.remove("k.mp3")
+        if BOTLOG:
+            await query.client.send_message(
+                BOTLOG_CHATID, "Text to Speech was executed successfully")
+        await query.delete()
 
 
 @register(outgoing=True, pattern=r"^.trt(?: |$)([\s\S]*)")
@@ -404,11 +397,11 @@ async def translateme(trans):
     if BOTLOG:
         await trans.client.send_message(
             BOTLOG_CHATID,
-            f"Translated some {source_lan.title()} stuff to {transl_lan.title()} just now.",
+            f"Translated some {source_lan.title()} stuff to {transl_lan.title()}.",
         )
 
 
-@register(pattern=".lang (trt|tts) (.*)", outgoing=True)
+@register(pattern=".lang (trt|tts|carbon) (.*)", outgoing=True)
 async def lang(value):
     """ For .lang command, change the default langauge of userbot scrapers. """
     util = value.pattern_match.group(1).lower()
@@ -419,9 +412,10 @@ async def lang(value):
         if arg in LANGUAGES:
             TRT_LANG = arg
             LANG = LANGUAGES[arg]
+            LANG_TITLE = LANG.title()
         else:
             return await value.edit(
-                f"`Invalid Language code !!`\n`Available language codes for TRT`:\n\n`{LANGUAGES}`"
+                f"`Invalid language code!`\n`Available language codes for TRT`:\n\n`{LANGUAGES}`"
             )
     elif util == "tts":
         scraper = "Text to Speech"
@@ -430,15 +424,22 @@ async def lang(value):
         if arg in tts_langs():
             TTS_LANG = arg
             LANG = tts_langs()[arg]
+            LANG_TITLE = LANG.title()
         else:
             return await value.edit(
-                f"`Invalid Language code !!`\n`Available language codes for TTS`:\n\n`{tts_langs()}`"
+                f"`Invalid language code!`\n`Available language codes for TTS`:\n\n`{tts_langs()}`"
             )
-    await value.edit(f"`Language for {scraper} changed to {LANG.title()}.`")
+    elif util == "carbon":
+        scraper = "carbon.now.sh"
+        global CARBON_LANG
+        arg = value.pattern_match.group(2).lower()
+        CARBON_LANG = arg
+        LANG_TITLE = arg
+    await value.edit(f"`Language for {scraper} changed to {LANG_TITLE}.`")
     if BOTLOG:
         await value.client.send_message(
             BOTLOG_CHATID,
-            f"`Language for {scraper} changed to {LANG.title()}.`")
+            f"`Language for {scraper} changed to {LANG_TITLE}.`")
 
 
 @register(outgoing=True, pattern="^.yt (.*)")
@@ -449,7 +450,7 @@ async def yt_search(video_q):
 
     if not YOUTUBE_API_KEY:
         return await video_q.edit(
-            "`Error: YouTube API key missing! Add it to environment vars or config.env.`"
+            "`Error: YouTube API key is missing! Add it to environment variables or config.env.`"
         )
 
     await video_q.edit("```Processing...```")
@@ -611,7 +612,7 @@ async def download_video(v_url):
             ],
             progress_callback=lambda d, t: asyncio.get_event_loop(
             ).create_task(
-                progress(d, t, v_url, c_time, "Uploading..",
+                progress(d, t, v_url, c_time, "[UPLOADING]",
                          f"{rip_data['title']}.mp3")))
         os.remove(f"{rip_data['id']}.mp3")
         await v_url.delete()
@@ -626,7 +627,7 @@ async def download_video(v_url):
             caption=rip_data['title'],
             progress_callback=lambda d, t: asyncio.get_event_loop(
             ).create_task(
-                progress(d, t, v_url, c_time, "Uploading..",
+                progress(d, t, v_url, c_time, "[UPLOADING]",
                          f"{rip_data['title']}.mp4")))
         os.remove(f"{rip_data['id']}.mp4")
         await v_url.delete()
@@ -639,40 +640,40 @@ def deEmojify(inputString):
 
 CMD_HELP.update({
     "img":
-    ">`.img <search_query>`"
-    "\nUsage: Does an image search on Google and shows 5 images.",
+    "• `.img <search query>`\n"
+    "Usage: Does an image search on Google and shows 5 images.",
     "currency":
-    ">`.currency <amount> <from> <to>`"
-    "\nUsage: Converts various currencies for you.",
+    "• `.currency <amount> <from> <to>`\n"
+    "Usage: Converts various currencies for you.",
     "carbon":
-    ">`.carbon <text> [or reply]`"
-    "\nUsage: Beautify your code using carbon.now.sh\n"
-    "Use .crblang <text> to set language for your code.",
+    "• `.carbon <text> [or reply]`\n"
+    "Usage: Beautify your code using carbon.now.sh\n"
+    "Use `.lang carbon <text>` to set language for your code.",
     "google":
-    ">`.google <query>`"
-    "\nUsage: Does a search on Google.",
+    "• `.google <query>`\n"
+    "Usage: Does a search on Google.",
     "wiki":
-    ">`.wiki <query>`"
-    "\nUsage: Does a search on Wikipedia.",
+    "• `.wiki <query>`\n"
+    "Usage: Does a search on Wikipedia.",
     "ud":
-    ">`.ud <query>`"
-    "\nUsage: Does a search on Urban Dictionary.",
+    "• `.ud <query>`\n"
+    "Usage: Does a search on Urban Dictionary.",
     "tts":
-    ">`.tts <text> [or reply]`"
-    "\nUsage: Translates text to speech for the language which is set."
-    "\nUse >`.lang tts <language code>` to set language for tts. (Default is English.)",
+    "• `.tts <text> [or reply]`\n"
+    "Usage: Translates text to speech for the language which is set.\n"
+    "Use `.lang tts <language code>` to set language for tts. (Default is English.)",
     "trt":
-    ">`.trt <text> [or reply]`"
-    "\nUsage: Translates text to the language which is set."
-    "\nUse >`.lang trt <language code>` to set language for trt. (Default is English)",
+    "• `.trt <text> [or reply]`\n"
+    "Usage: Translates text to the language which is set.\n"
+    "Use `.lang trt <language code>` to set language for trt. (Default is English)",
     "yt":
-    ">`.yt <text>`"
-    "\nUsage: Does a YouTube search.",
+    "• `.yt <text>`\n"
+    "Usage: Does a YouTube search.",
     "imdb":
-    ">`.imdb <movie-name>`"
-    "\nUsage: Shows movie info and other stuff.",
+    "• `.imdb <movie-name>`\n"
+    "Usage: Shows movie info and other stuff.",
     "rip":
-    ">`.ripaudio <url> or ripvideo <url>`"
-    "\nUsage: Download videos and songs from YouTube "
+    "• `.ripaudio <url>` or `ripvideo <url>`\n"
+    "Usage: Download videos and songs from YouTube "
     "(and [many other sites](https://ytdl-org.github.io/youtube-dl/supportedsites.html))."
 })

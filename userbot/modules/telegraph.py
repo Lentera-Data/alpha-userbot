@@ -30,7 +30,7 @@ async def telegraphs(graph):
                 )
                 end = datetime.now()
                 ms = (end - start).seconds
-                await graph.edit("Downloaded to {} in {} seconds.".format(downloaded_file_name, ms))
+                await graph.edit("Downloaded to `{}` in {} seconds.".format(downloaded_file_name, ms))
                 if downloaded_file_name.endswith((".webp")):
                     resize_image(downloaded_file_name)
                 try:
@@ -43,8 +43,9 @@ async def telegraphs(graph):
                     end = datetime.now()
                     ms_two = (end - start).seconds
                     os.remove(downloaded_file_name)
-                    await graph.edit("Successfully Uploaded to [telegra.ph](https://telegra.ph{})."
-                                     .format(media_urls[0], (ms + ms_two)), link_preview=True)
+                    await graph.edit(
+                        "Successfully uploaded to [telegra.ph](https://telegra.ph{}) in {} seconds."
+                        .format(media_urls[0], (ms + ms_two)), link_preview=True)
             elif input_str == "text":
                 user_object = await bot.get_entity(r_message.from_id)
                 title_of_page = user_object.first_name  # + " " + user_object.last_name
@@ -70,8 +71,9 @@ async def telegraphs(graph):
                 )
                 end = datetime.now()
                 ms = (end - start).seconds
-                await graph.edit("Successfully uploaded to [telegra.ph](https://telegra.ph/{})."
-                                 .format(response["path"], ms), link_preview=True)
+                await graph.edit(
+                    "Successfully uploaded to [telegra.ph](https://telegra.ph/{}) in {} seconds."
+                    .format(response["path"], ms), link_preview=True)
         else:
             await graph.edit("`Reply to a message to get a permanent telegra.ph link.`")
 
@@ -83,6 +85,6 @@ def resize_image(image):
 
 CMD_HELP.update({
     "telegraph":
-    ">`.telegraph media|text`"
-    "\nUsage: Upload text & media on Telegraph."
+    "• `.telegraph <media/text>`\n"
+    "Usage: Uploads replied text & media to Telegraph."
 })

@@ -20,7 +20,7 @@ async def tmeme(e):
     if BOTLOG:
         await e.client.send_message(
             BOTLOG_CHATID, "#CSPAM\n"
-            "TSpam was executed successfully")
+            "CSpam was executed successfully")
 
 
 @register(outgoing=True, pattern="^.wspam (.*)")
@@ -73,21 +73,21 @@ async def spammer(e):
         await sleep(spamDelay)
     if BOTLOG:
         await e.client.send_message(
-            BOTLOG_CHATID, "#DelaySPAM\n"
+            BOTLOG_CHATID, "#DELAYSPAM\n"
             "DelaySpam was executed successfully")
 
 
 CMD_HELP.update({
     "spam":
-    ">`.cspam <text>`"
-    "\nUsage: Spam the text letter by letter."
-    "\n\n>`.spam <count> <text>`"
-    "\nUsage: Floods text in the chat !!"
-    "\n\n>`.wspam <text>`"
-    "\nUsage: Spam the text word by word."
-    "\n\n>`.picspam <count> <link to image/gif>`"
-    "\nUsage: As if text spam was not enough !!"
-    "\n\n>`.delayspam <delay> <count> <text>`"
-    "\nUsage: .bigspam but with custom delay."
-    "\n\n\nNOTE : Spam at your own risk !!"
+    "• `.cspam <text>`\n"
+    "Usage: Spam the text letter by letter.\n\n"
+    "• `.spam <count> <text>`\n"
+    "Usage: Floods text in the chat!\n\n"
+    "• `.wspam <text>`\n"
+    "Usage: Spam the text word by word.\n\n"
+    "• `.picspam <count> <link to image/gif>`\n"
+    "Usage: As if text spam wasn't enough!\n\n"
+    "• `.delayspam <delay> <count> <text>`\n"
+    "Usage: Big spam but with custom delay.\n\n\n"
+    "**NOTE : Spam at your own risk!**"
 })

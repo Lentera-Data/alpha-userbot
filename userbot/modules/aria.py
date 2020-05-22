@@ -152,7 +152,7 @@ async def show_all(event):
                         download.status) + "\nETA:  " + str(
                             download.eta_string()) + "\n\n"
     if len(msg) <= 4096:
-        await event.edit("`On-going Downloads: `\n" + msg)
+        await event.edit("`On-going Downloads:`\n" + msg)
         await sleep(5)
         await event.delete()
     else:
@@ -225,7 +225,7 @@ async def check_progress_for_dl(gid, event, previous):
             elif " depth exceeded" in str(e):
                 file.remove(force=True)
                 await event.edit(
-                    "Download Auto Canceled :\n`{}`\nYour Torrent/Link is Dead."
+                    "Download Auto Canceled:\n`{}`\nYour Torrent/Link is Dead."
                     .format(file.name))
 
 

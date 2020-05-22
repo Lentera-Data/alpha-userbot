@@ -19,7 +19,7 @@ async def kbg(remob):
     """ For .rbg command, Remove Image Background. """
     if REM_BG_API_KEY is None:
         return await remob.edit(
-            "`Error: Remove.BG API key missing! Add it to environment vars or config.env.`"
+            "`Error: Remove.bg API key is missing! Add it to environment variables or config.env.`"
         )
     input_str = remob.pattern_match.group(1)
     message_id = remob.message.id
@@ -37,7 +37,7 @@ async def kbg(remob):
                 output_file_name = await ReTrieveFile(downloaded_file_name)
                 os.remove(downloaded_file_name)
             else:
-                await remob.edit("`How do I remove the background from this ?`"
+                await remob.edit("`How do I remove the background from this?`"
                                  )
         except Exception as e:
             return await remob.edit(str(e))
@@ -59,7 +59,7 @@ async def kbg(remob):
                 reply_to=message_id)
             await remob.delete()
     else:
-        await remob.edit("**Error (Invalid API key, I guess ?)**\n`{}`".format(
+        await remob.edit("**Error (Invalid API key, I guess?)**\n`{}`".format(
             output_file_name.content.decode("UTF-8")))
 
 
@@ -95,6 +95,7 @@ async def ReTrieveURL(input_url):
 
 CMD_HELP.update({
     "rbg":
-    ">`.rbg <Link to Image> or reply to any image (Warning: does not work on stickers.)`"
-    "\nUsage: Removes the background of images, using remove.bg API"
+    "• `.rbg <image url> or reply to any image`\n"
+    "Usage: Removes the background of images, using remove.bg API\n"
+    "**WARNING**: Doesn't works on stickers."
 })

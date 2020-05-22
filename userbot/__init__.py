@@ -145,7 +145,7 @@ TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY",
                                          "./downloads")
 
 # Terminal Alias
-TERM_ALIAS = os.environ.get("TERM_ALIAS", None)
+TERM_ALIAS = os.environ.get("TERM_ALIAS", "alpha")
 
 # Genius Lyrics API
 GENIUS = os.environ.get("GENIUS_ACCESS_TOKEN", None)
@@ -209,10 +209,11 @@ with bot:
     except:
         LOGS.info(
             "BOTLOG_CHATID environment variable isn't a "
-            "valid entity. Check your environment variables/config.env file.")
+            "valid entity. Check your environment variables or config.env file.")
         quit(1)
 
 # Global Variables
+BOT_VERSION = "1.0.6"
 COUNT_MSG = 0
 USERS = {}
 COUNT_PM = {}

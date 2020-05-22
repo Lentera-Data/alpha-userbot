@@ -16,20 +16,24 @@ from userbot.events import register
 async def gethash(hash_q):
     """ For .hash command, find the md5, sha1, sha256, sha512 of the string. """
     hashtxt_ = hash_q.pattern_match.group(1)
-    hashtxt = open("hashdis.txt", "w+")
+    hashtxt = open("hashthis.txt", "w+")
     hashtxt.write(hashtxt_)
     hashtxt.close()
-    md5 = runapp(["md5sum", "hashdis.txt"], stdout=PIPE)
+    md5 = runapp(["md5sum", "hashthis.txt"], stdout=PIPE)
     md5 = md5.stdout.decode()
-    sha1 = runapp(["sha1sum", "hashdis.txt"], stdout=PIPE)
+    md5 = md5[:-14]
+    sha1 = runapp(["sha1sum", "hashthis.txt"], stdout=PIPE)
     sha1 = sha1.stdout.decode()
-    sha256 = runapp(["sha256sum", "hashdis.txt"], stdout=PIPE)
+    sha1 = sha1[:-14]
+    sha256 = runapp(["sha256sum", "hashthis.txt"], stdout=PIPE)
     sha256 = sha256.stdout.decode()
-    sha512 = runapp(["sha512sum", "hashdis.txt"], stdout=PIPE)
-    runapp(["rm", "hashdis.txt"], stdout=PIPE)
+    sha256 = sha256[:-14]
+    sha512 = runapp(["sha512sum", "hashthis.txt"], stdout=PIPE)
     sha512 = sha512.stdout.decode()
-    ans = ("Text: `" + hashtxt_ + "`\nMD5: `" + md5 + "`SHA1: `" + sha1 +
-           "`SHA256: `" + sha256 + "`SHA512: `" + sha512[:-1] + "`")
+    sha512 = sha512[:-14]
+    runapp(["rm", "hashthis.txt"], stdout=PIPE)
+    ans = ("**Text:** `" + hashtxt_ + "`\n**MD5:** `" + md5 + "`\n**SHA1:** `" +
+            sha1 + "`\n**SHA256:** `" + sha256 + "`\n**SHA512:** `" + sha512 + "`")
     if len(ans) > 4096:
         hashfile = open("hashes.txt", "w+")
         hashfile.write(ans)
@@ -61,9 +65,9 @@ async def endecrypt(query):
 
 CMD_HELP.update({
     "hash":
-    ">`.hash`"
-    "\nUsage: Find the md5, sha1, sha256, sha512 of the string when written into a txt file.",
+    "• `.hash`\n"
+    "Usage: Find the md5, sha1, sha256, sha512 of the string when written into a txt file.",
     "base64":
-    ">`.base64 [en or de]`"
-    "\nUsage: Find the base64 encoding of the given string or decode it."
+    "• `.base64 <en/de>`\n"
+    "Usage: Find the base64 encoding/decoding of the given string."
 })

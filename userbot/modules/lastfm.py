@@ -21,14 +21,14 @@ from userbot import (CMD_HELP, BOTLOG, BOTLOG_CHATID, DEFAULT_BIO,
 from userbot.events import register
 
 # =================== CONSTANT ===================
-LFM_BIO_ENABLED = "```last.fm current music to bio is now enabled.```"
-LFM_BIO_DISABLED = "```last.fm current music to bio is now disabled. Bio reverted to default.```"
-LFM_BIO_RUNNING = "```last.fm current music to bio is already running.```"
+LFM_BIO_ENABLED = "```Last.fm current music to bio is now enabled.```"
+LFM_BIO_DISABLED = "```Last.fm current music to bio is now disabled. Bio reverted to default.```"
+LFM_BIO_RUNNING = "```Last.fm current music to bio is already running.```"
 LFM_BIO_ERR = "```No option specified.```"
-LFM_LOG_ENABLED = "```last.fm logging to bot log is now enabled.```"
-LFM_LOG_DISABLED = "```last.fm logging to bot log is now disabled.```"
+LFM_LOG_ENABLED = "```Last.fm is now logging to bot log.```"
+LFM_LOG_DISABLED = "```Last.fm no longer logging to bot log.```"
 LFM_LOG_ERR = "```No option specified.```"
-ERROR_MSG = "```last.fm module halted, got an unexpected error.```"
+ERROR_MSG = "```Last.fm module halted, got an unexpected error.```"
 
 ARTIST = 0
 SONG = 0
@@ -220,10 +220,10 @@ async def lastlog(lstlog):
 
 CMD_HELP.update({
     "lastfm":
-    ">`.lastfm`"
-    "\nUsage: Shows currently scrobbling track or most recent scrobbles if nothing is playing."
-    "\n\n>`.lastbio <on/off>`"
-    "\nUsage: Enables/Disables last.fm current playing to bio."
-    "\n\n>`.lastlog <on/off>`"
-    "\nUsage: Enable/Disable last.fm bio logging in the bot-log group."
+    "• `.lastfm`\n"
+    "Usage: Shows currently scrobbling track or most recent scrobbles if nothing is playing.\n\n"
+    "• `.lastbio <on/off>`\n"
+    "Usage: Enables/Disables Last.fm current playing to bio.\n\n"
+    "• `.lastlog <on/off>`\n"
+    "Usage: Enables/Disables Last.fm bio logging in the bot-log group."
 })

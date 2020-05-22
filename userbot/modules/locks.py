@@ -68,7 +68,7 @@ async def locks(event):
         what = "everything"
     else:
         if not input_str:
-            return await event.edit("`I can't lock nothing !!`")
+            return await event.edit("`I can't lock nothing!`")
         else:
             return await event.edit(f"`Invalid lock type:` {input_str}")
 
@@ -89,7 +89,7 @@ async def locks(event):
         await event.client(
             EditChatDefaultBannedRightsRequest(peer=peer_id,
                                                banned_rights=lock_rights))
-        await event.edit(f"`Locked {what} for this chat !!`")
+        await event.edit(f"`Locked {what} for this chat!`")
     except BaseException as e:
         return await event.edit(
             f"`Do I have proper rights for that ??`\n**Error:** {str(e)}")
@@ -153,7 +153,7 @@ async def rem_locks(event):
         what = "everything"
     else:
         if not input_str:
-            return await event.edit("`I can't unlock nothing !!`")
+            return await event.edit("`I can't unlock nothing!`")
         else:
             return await event.edit(f"`Invalid unlock type:` {input_str}")
 
@@ -174,17 +174,18 @@ async def rem_locks(event):
         await event.client(
             EditChatDefaultBannedRightsRequest(peer=peer_id,
                                                banned_rights=unlock_rights))
-        await event.edit(f"`Unlocked {what} for this chat !!`")
+        await event.edit(f"`Unlocked {what} for this chat!`")
     except BaseException as e:
         return await event.edit(
-            f"`Do I have proper rights for that ??`\n**Error:** {str(e)}")
+            f"`Do I have proper rights for that?`\n**Error:** {str(e)}")
 
 
 CMD_HELP.update({
     "locks":
-    ">`.lock <all (or) type(s)>` or >`.unlock <all (or) type(s)>`"
-    "\nUsage: Allows you to lock/unlock some common message types in the chat."
-    "\n[NOTE: Requires proper admin rights in the chat !!]"
-    "\n\nAvailable message types to lock/unlock are: "
-    "\n`all, msg, media, sticker, gif, game, inline, poll, invite, pin, info`"
+    "• `.lock <all/type(s)>` or `.unlock <all/type(s)>`\n"
+    "Usage: Allows you to lock/unlock some common message types in the chat.\n"
+    "**NOTE**: Requires proper admin rights in the chat!\n"
+    "Available message types:\n"
+    "`all`, `msg`, `media`, `sticker`, `gif`, `game`, "
+    "`inline`, `poll`, `invite`, `pin`, `info`"
 })

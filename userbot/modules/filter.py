@@ -59,8 +59,9 @@ async def add_new_filter(new_handler):
     if msg and msg.media and not string:
         if BOTLOG_CHATID:
             await new_handler.client.send_message(
-                BOTLOG_CHATID, f"#FILTER\nCHAT ID: {new_handler.chat_id}\nTRIGGER: {keyword}"
-                "\n\nThe following message is saved as the filter's reply data for the chat, please do NOT delete it !!"
+                BOTLOG_CHATID, f"#FILTER\nCHAT ID: {new_handler.chat_id}\nTRIGGER: {keyword}\n\n"
+                "The following message is saved as the filter's reply data for the chat, "
+                "please **DON'T** delete it!"
             )
             msg_o = await new_handler.client.forward_messages(
                 entity=BOTLOG_CHATID,
@@ -144,14 +145,14 @@ async def filters_active(event):
 
 CMD_HELP.update({
     "filter":
-    ">`.filters`"
-    "\nUsage: Lists all active userbot filters in a chat."
-    "\n\n>`.filter <keyword> <reply text>` or reply to a message with >`.filter <keyword>`"
-    "\nUsage: Saves the replied message as a reply to the 'keyword'."
-    "\nThe bot will reply to the message whenever 'keyword' is mentioned."
-    "\nWorks with everything from files to stickers."
-    "\n\n>`.stop <filter>`"
-    "\nUsage: Stops the specified filter."
-    "\n\n>`.rmbotfilters <marie/rose>`"
-    "\nUsage: Removes all filters of admin bots (Currently supported: Marie, Rose and their clones.) in the chat."
+    "• `.filters`\n"
+    "Usage: Lists all active userbot filters in a chat.\n\n"
+    "• `.filter <keyword> <reply text>` or reply to a message with `.filter <keyword>`\n"
+    "Usage: Saves the replied message as a reply to the 'keyword'. "
+    "The bot will reply to the message whenever 'keyword' is mentioned. "
+    "Works with everything from files to stickers.\n\n"
+    "• `.stop <filter>`\n"
+    "Usage: Stops the specified filter.\n\n"
+    "• `.rmbotfilters <marie/rose>`\n"
+    "Usage: Removes all filters of admin bots (currently supported: Marie, Rose and their clones.) in the chat."
 })

@@ -23,12 +23,12 @@ KANGING_STR = [
     "Plagiarising hehe...",
     "Inviting this sticker over to my pack...",
     "Kanging this sticker...",
-    "Hey that's a nice sticker!\nMind if I kang?!..",
-    "hehe me stel ur stikér\nhehe.",
-    "Ay look over there (☉｡☉)!→\nWhile I kang this...",
-    "Roses are red violets are blue, kanging this sticker so my pacc looks cool",
+    "Hey that's a nice sticker!\nMind if I kang?!",
+    "Hehe, me steal ur stikér\nHehehe...",
+    "HeY, look over there (☉｡☉)!→\nWhile I kang this...",
+    "Roses are red violets are blue, kanging this sticker so my pack looks cool",
     "Imprisoning this sticker...",
-    "Mr.Steal Your Sticker is stealing this sticker... ",
+    "Mr.Steal Your Sticker is stealing this sticker...",
 ]
 
 
@@ -72,7 +72,7 @@ async def kang(args):
             is_anim = True
             photo = 1
         else:
-            return await args.edit("`Unsupported File!`")
+            return await args.edit("`Unsupported file!`")
     else:
         return await args.edit("`I can't kang that...`")
 
@@ -94,8 +94,8 @@ async def kang(args):
                 # pack
                 emoji = splat[1]
 
-        packname = f"a{user.id}_by_{user.username}_{pack}"
-        packnick = f"@{user.username}'s kang pack Vol.{pack}"
+        packname = f"pack{pack}_by_{user.id}"
+        packnick = f"@{user.username.capitalize()}'s Pack Vol. {pack}"
         cmd = '/newpack'
         file = io.BytesIO()
 
@@ -122,9 +122,9 @@ async def kang(args):
                 x = await conv.get_response()
                 while "120" in x.text:
                     pack += 1
-                    packname = f"a{user.id}_by_{user.username}_{pack}"
-                    packnick = f"@{user.username}'s kang pack Vol.{pack}"
-                    await args.edit("`Switching to Pack " + str(pack) +
+                    packname = f"pack{pack}_by_{user.id}"
+                    packnick = f"@{user.username.capitalize()}'s Pack Vol. {pack}"
+                    await args.edit("`Switching to pack " + str(pack) +
                                     " due to insufficient space`")
                     await conv.send_message(packname)
                     x = await conv.get_response()
@@ -166,8 +166,8 @@ async def kang(args):
                         # Ensure user doesn't get spamming notifications
                         await bot.send_read_acknowledge(conv.chat_id)
                         return await args.edit(
-                            "`Sticker added in a Different Pack !"
-                            "\nThis Pack is Newly created!"
+                            "`Sticker added in a different pack!"
+                            "\nThis pack is newly created!"
                             f"\nYour pack can be found [here](t.me/addstickers/{packname})",
                             parse_mode='md')
                 if is_anim:
@@ -234,8 +234,8 @@ async def kang(args):
                 await bot.send_read_acknowledge(conv.chat_id)
 
         await args.edit(
-            "`Sticker kanged successfully!`"
-            f"\nPack can be found [here](t.me/addstickers/{packname})",
+            "`Sticker kanged successfully!`\n"
+            f"Pack can be found [here](t.me/addstickers/{packname})",
             parse_mode='md')
 
 
@@ -264,10 +264,10 @@ async def resize_photo(photo):
     return image
 
 
-@register(outgoing=True, pattern="^.stkrinfo$")
+@register(outgoing=True, pattern="^.stickerinfo$")
 async def get_pack_info(event):
     if not event.is_reply:
-        return await event.edit("`I can't fetch info from nothing, can I ?!`")
+        return await event.edit("`I can't fetch info from nothing, can I?!`")
 
     rep_msg = await event.get_reply_message()
     if not rep_msg.document:
@@ -329,7 +329,7 @@ async def sticker_to_png(sticker):
         try:
             await img.reply(file=image, force_document=True)
         except Exception:
-            await sticker.edit("`Err, can't send file...`")
+            await sticker.edit("`Err, can't send the file...`")
         else:
             await sticker.delete()
     return
@@ -337,14 +337,13 @@ async def sticker_to_png(sticker):
 
 CMD_HELP.update({
     "stickers":
-    ">`.kang [emoji('s)]?`"
-    "\nUsage: Reply .kang to a sticker or an image to kang it to your userbot pack "
-    "\nor specify the emoji you want to."
-    "\n\n>`.kang (emoji['s]]?` [number]?"
-    "\nUsage: Kang's the sticker/image to the specified pack but uses 🤔 as emoji "
-    "or choose the emoji you want to."
-    "\n\n>`.stkrinfo`"
-    "\nUsage: Gets info about the sticker pack."
-    "\n\n>`.getsticker`"
-    "\nUsage: reply to a sticker to get 'PNG' file of sticker."
+    "• `.kang <emoji(s)> <pack number>`\n"
+    "Usage: Kangs replied image or sticker into your userbot pack\n"
+    "Note: `<emoji(s)>` and `<pack number>` is optional. "
+    "You can use both, one of them, or not at all.\n"
+    "Default value: <🤔> and <1>.\n\n"
+    "• `.stickerinfo`\n"
+    "Usage: Gets info about the sticker pack.\n\n"
+    "• `.getsticker`\n"
+    "Usage: Gets 'PNG' file of replied sticker."
 })

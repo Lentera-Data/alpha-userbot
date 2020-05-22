@@ -71,7 +71,7 @@ async def mega_downloader(megadl):
         if "file" in link:
             link = link.replace("#", "!").replace("file/", "#!")
         elif "folder" in link or "#F" in link or "#N" in link:
-            await megadl.edit("`folder download support are removed...`")
+            await megadl.edit("`Folder download support are removed...`")
             return
     except IndexError:
         return await megadl.edit("`MEGA.nz link not found...`")
@@ -80,7 +80,7 @@ async def mega_downloader(megadl):
     try:
         data = json.loads(result[0])
     except json.JSONDecodeError:
-        return await megadl.edit("`Err: failed to extract link...`\n")
+        return await megadl.edit("`Error: failed to extract link...`\n")
     except (IndexError, TypeError):
         return
     file_name = data["file_name"]
@@ -159,7 +159,7 @@ async def mega_downloader(megadl):
                 f"Download took: {time_formatter(download_time)}.")
     else:
         await megadl.edit("`Failed to download, "
-                          "check heroku Logs for more details`.")
+                          "check Heroku logs for more details`.")
         for e in downloader.get_errors():
             LOGS.info(str(e))
     return
@@ -179,7 +179,7 @@ async def decrypt_file(megadl, file_path, temp_file_path,
 
 CMD_HELP.update({
     "mega":
-    ">`.mega <MEGA.nz link>`"
-    "\nUsage: Reply to a MEGA.nz link or paste your MEGA.nz link to "
-    "download the file into your userbot server."
+    "• `.mega <MEGA.nz link>`\n"
+    "Usage: Downloads file from given MEGA.nz link or "
+    "replied MEGA.nz link into bot server."
 })

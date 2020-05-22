@@ -898,8 +898,8 @@ async def google_drive_managers(gdrive):
                 except Exception as e:
                     reply += (
                         f"`[FILE/FOLDER - ERROR]`\n\n"
-                        "`Status` : **BAD**"
-                        f"`Reason` : `{str(e)}`\n\n"
+                        "`Status` : **BAD**\n"
+                        f"`Reason` : `{str(e)}`"
                     )
                     continue
             name = f.get('name')
@@ -914,8 +914,8 @@ async def google_drive_managers(gdrive):
                 status.replace("DELETE]", "ERROR]")
                 reply += (
                     f"`{status}`\n\n"
-                    "`Status` : **BAD**"
-                    f"`Reason` : {str(e)}\n\n"
+                    "`Status` : **BAD**\n"
+                    f"`Reason` : {str(e)}"
                 )
                 continue
             else:
@@ -937,7 +937,7 @@ async def google_drive_managers(gdrive):
                     reply += (
                         "`[FILE/FOLDER - ERROR]`\n\n"
                         "`Status` : **BAD**\n"
-                        f"`Reason` : `{str(e)}`\n\n"
+                        f"`Reason` : `{str(e)}`"
                     )
                     continue
             """ - If exists parse file/folder information - """
@@ -1037,7 +1037,7 @@ async def google_drive(gdrive):
             await gdrive.edit(
                 "`[FOLDER - UPLOAD]`\n\n"
                 f"[{folder_name}]({webViewURL})\n"
-                "`Status` : **OK** - Successfully uploaded.\n\n"
+                "`Status` : **OK** - Successfully uploaded."
             )
             return await reset_parentId()
     elif not value and gdrive.reply_to_msg_id:
@@ -1061,7 +1061,7 @@ async def google_drive(gdrive):
                     reply += (
                         "`[FILE - ERROR]`\n\n"
                         "`Status` : **BAD**\n"
-                        f"`Reason` : {str(e)}\n\n"
+                        f"`Reason` : `{str(e)}`"
                     )
                     continue
             if reply:
@@ -1094,7 +1094,7 @@ async def google_drive(gdrive):
                         reply += (
                             "`[FILE - ERROR]`\n\n"
                             "`Status` : **BAD**\n"
-                            f"`Reason` : {str(e)}\n\n"
+                            f"`Reason` : `{str(e)}`"
                         )
                         continue
             if reply:
@@ -1106,7 +1106,7 @@ async def google_drive(gdrive):
             return await gdrive.edit(
                 "`[VALUE - ERROR]`\n\n"
                 "`Status` : **BAD**\n"
-                "`Reason` : given value is not URL nor file/folder path. "
+                "`Reason` : Given value is not URL nor file/folder path. "
                 "If you think this is wrong, maybe you use .gd with multiple "
                 "value of files/folders, e.g `.gd <filename1> <filename2>` "
                 "for upload from files/folders path this doesn't support it."
@@ -1128,7 +1128,7 @@ async def google_drive(gdrive):
                     reply += (
                         "`[UNKNOWN - ERROR]`\n\n"
                         "`Status` : **BAD**\n"
-                        f"`Reason` : `{dl}` | `{str(e)}`\n\n"
+                        f"`Reason` : `{dl}` | `{str(e)}`"
                     )
                     continue
         await gdrive.respond(reply, link_preview=False)
@@ -1185,7 +1185,7 @@ async def set_upload_folder(gdrive):
                 )
     inp = gdrive.pattern_match.group(2)
     if not inp:
-        return await gdrive.edit(">`.gdfset put <folderURL/folderID>`")
+        return await gdrive.edit("• `.gdfset put <folderURL/folderID>`")
     """ - Value for .gdfset (put|rm) can be folderId or folder link - """
     try:
         ext_id = re.findall(r'\bhttps?://drive\.google\.com\S+', inp)[0]
@@ -1304,34 +1304,34 @@ async def check_progress_for_dl(gdrive, gid, previous):
 
 CMD_HELP.update({
     "gdrive":
-    ">`.gdauth`"
-    "\nUsage: generate token to enable all cmd google drive service."
-    "\nThis only need to run once in life time."
-    "\n\n>`.gdreset`"
-    "\nUsage: reset your token if something bad happened or change drive acc."
-    "\n\n>`.gd`"
-    "\nUsage: Upload file from local or uri/url/drivelink into google drive."
-    "\nfor drivelink it's upload only if you want to."
-    "\n\n>`.gdabort`"
-    "\nUsage: Abort process uploading or downloading."
-    "\n\n>`.gdlist`"
-    "\nUsage: Get list of folders and files with default size 50."
-    "\nUse flags `-l range[1-1000]` for limit output."
-    "\nUse flags `-p parents-folder_id` for lists given folder in gdrive."
-    "\n\n>`.gdf mkdir`"
-    "\nUsage: Create gdrive folder."
-    "\n\n>`.gdf chck`"
-    "\nUsage: Check file/folder in gdrive."
-    "\n\n>`.gdf rm`"
-    "\nUsage: Delete files/folders in gdrive."
-    "\nCan't be undone, this method skipping file trash, so be caution..."
-    "\n\n>`.gdfset put`"
-    "\nUsage: Change upload directory in gdrive."
-    "\n\n>`.gdfset rm`"
-    "\nUsage: remove set parentId from cmd\n>`.gdfset put` "
-    "into **G_DRIVE_FOLDER_ID** and if empty upload will go to root."
-    "\n\nNOTE:"
-    "\nfor >`.gdlist` you can combine -l and -p flags with or without name "
-    "at the same time, it must be `-l` flags first before use `-p` flags.\n"
-    "And by default it lists from latest 'modifiedTime' and then folders."
+    "• `.gdauth`\n"
+    "Usage: Generates token to enable all Google Drive service.\n"
+    "This only needs to be run once in a lifetime.\n\n"
+    "• `.gdreset`\n"
+    "Usage: Reset your token if something bad happens or changes Drive account.\n\n"
+    "• `.gd`\n"
+    "Usage: Upload file from local or uri/url/drivelink into Google Drive.\n"
+    "For drivelink, it's upload only if you want to.\n\n"
+    "• `.gdabort`\n"
+    "Usage: Abort upload/download process.\n\n"
+    "• `.gdlist`\n"
+    "Usage: Gets list of folders and files with default size 50.\n"
+    "Use `-l range <1-1000>` flags to limit output.\n"
+    "Use `-p parents-folder_id` flags to lists given folder in GDrive.\n\n"
+    "• `.gdf mkdir`\n"
+    "Usage: Creates GDrive folder.\n\n"
+    "• `.gdf chck`\n"
+    "Usage: Check file/folder in GDrive.\n\n"
+    "• `.gdf rm`\n"
+    "Usage: Deletes files/folders in GDrive.\n"
+    "BE CAREFUL, this method skips the trash and can't be undone.\n\n"
+    "• `.gdfset put`\n"
+    "Usage: Changes upload directory in GDrive.\n\n"
+    "• `.gdfset rm`\n"
+    "Usage: Revert upload directory into **G_DRIVE_FOLDER_ID**. "
+    "If empty, uploads will go to root.\n\n"
+    "NOTE(S):\n"
+    "For `.gdlist`, you can combine `-l` and `-p` flags with or without name "
+    "at the same time, it must be `-l` flags first before the `-p` flags. "
+    "By default, it lists from latest 'modifiedTime' and then folders."
 })

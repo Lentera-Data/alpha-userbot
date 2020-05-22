@@ -84,9 +84,9 @@ async def mention_afk(mention):
                 afk_str = f"`{int(seconds)}s` ago"
             if mention.sender_id not in USERS:
                 if AFKREASON:
-                    await mention.reply("I'm AFK right now."
-                                        f"\nBecause I'm `{AFKREASON}`."
-                                        f"\nAFK since: {afk_str}")
+                    await mention.reply("I'm AFK right now.\n"
+                                        f"Reason: `{AFKREASON}`.\n"
+                                        f"AFK since: {afk_str}")
                 else:
                     await mention.reply(str(choice(AFKSTR)))
                 USERS.update({mention.sender_id: 1})
@@ -94,9 +94,9 @@ async def mention_afk(mention):
             elif mention.sender_id in USERS:
                 if USERS[mention.sender_id] % randint(2, 4) == 0:
                     if AFKREASON:
-                        await mention.reply("I'm still AFK."
-                                            f"\nReason: `{AFKREASON}`."
-                                            f"\nAFK from: {afk_str}")
+                        await mention.reply("I'm still AFK.\n"
+                                            f"Reason: `{AFKREASON}`.\n"
+                                            f"AFK from: {afk_str}")
                     else:
                         await mention.reply(str(choice(AFKSTR)))
                     USERS[mention.sender_id] = USERS[mention.sender_id] + 1
@@ -157,9 +157,9 @@ async def afk_on_pm(sender):
                 afk_str = f"`{int(seconds)}s` ago"
             if sender.sender_id not in USERS:
                 if AFKREASON:
-                    await sender.reply("I'm AFK right now."
-                                       f"\nReason: `{AFKREASON}`."
-                                       f"\nAFK since: {afk_str}")
+                    await sender.reply("I'm AFK right now.\n"
+                                       f"Reason: `{AFKREASON}`.\n"
+                                       f"AFK since: {afk_str}")
                 else:
                     await sender.reply(str(choice(AFKSTR)))
                 USERS.update({sender.sender_id: 1})
@@ -167,9 +167,9 @@ async def afk_on_pm(sender):
             elif apprv and sender.sender_id in USERS:
                 if USERS[sender.sender_id] % randint(2, 4) == 0:
                     if AFKREASON:
-                        await sender.reply("I'm still AFK."
-                                           f"\nReason: `{AFKREASON}`."
-                                           f"\nAFK from: {afk_str}")
+                        await sender.reply("I'm still AFK.\n"
+                                           f"Reason: `{AFKREASON}`.\n"
+                                           f"AFK from: {afk_str}")
                     else:
                         await sender.reply(str(choice(AFKSTR)))
                     USERS[sender.sender_id] = USERS[sender.sender_id] + 1
@@ -245,7 +245,7 @@ async def type_afk_is_not_true(notafk):
 CMD_HELP.update({
     "afk":
     "• `.afk <reason (optional)>`\n"
-    "Usage: Sets you as AFK. Replies to anyone who tags/PM's "
+    "Usage: Sets you as AFK. Replies to anyone who tags/PMs "
     "you telling them that you are AFK (with reason). "
     "Switches off AFK when you type back anything, anywhere."
 })

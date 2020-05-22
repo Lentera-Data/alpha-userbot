@@ -22,7 +22,7 @@ from userbot.events import register
 
 @register(pattern=r"^.decode$", outgoing=True)
 async def parseqr(qr_e):
-    """ For .decode command, get QR Code/BarCode content from the replied photo. """
+    """ For .decode command, get QR Code/Barcode content from the replied photo. """
     downloaded_file_name = await qr_e.client.download_media(
         await qr_e.get_reply_message())
     # parse the Official ZXing webpage to decode the QRCode
@@ -92,9 +92,9 @@ async def bq(event):
     await event.delete()
 
 
-@register(pattern=r".makeqr(?: |$)([\s\S]*)", outgoing=True)
+@register(pattern=r".qr(?: |$)([\s\S]*)", outgoing=True)
 async def make_qr(makeqr):
-    """ For .makeqr command, make a QR Code containing the given content. """
+    """ For .qr command, make a QR Code containing the given content. """
     input_str = makeqr.pattern_match.group(1)
     message = "SYNTAX: `.makeqr <long text to include>`"
     reply_msg_id = None
@@ -125,23 +125,23 @@ async def make_qr(makeqr):
     qr.add_data(message)
     qr.make(fit=True)
     img = qr.make_image(fill_color="black", back_color="white")
-    img.save("img_file.webp", "PNG")
+    img.save("img_file.png", "PNG")
     await makeqr.client.send_file(makeqr.chat_id,
-                                  "img_file.webp",
+                                  "img_file.png",
                                   reply_to=reply_msg_id)
-    os.remove("img_file.webp")
+    os.remove("img_file.png")
     await makeqr.delete()
 
 
 CMD_HELP.update({
     "qr":
-    ">`.makeqr <content>`"
-    "\nUsage: Make a QR Code from the given content."
-    "\nExample: .makeqr www.google.com"
-    "\nNote: use `.decode <reply to barcode/qrcode>` to get decoded content.",
+    "• `.qr <content>`\n"
+    "Usage: Makes a QR Code from the given content.\n"
+    "Example: `.qr www.google.com`\n"
+    "Note: Use `.decode <reply to barcode/qrcode>` to get decoded content.",
     "barcode":
-    ">`.barcode <content>`"
-    "\nUsage: Make a BarCode from the given content."
-    "\nExample: .barcode www.google.com"
-    "\nNote: use `.decode <reply to barcode/qrcode>` to get decoded content."
+    "• `.barcode <content>`"
+    "Usage: Make a Barcode from the given content.\n"
+    "Example: `.barcode www.google.com`\n"
+    "Note: use `.decode <reply to barcode/qrcode>` to get decoded content.\n"
 })

@@ -143,7 +143,7 @@ async def ANTI_SPAMBOTS(welcm):
                     try:
 
                         await welcm.reply(
-                            "`Potential Spambot Detected !!`\n"
+                            "`Potential Spambot Detected!`\n"
                             f"`REASON:` {reason}\n"
                             "Kicking away for now, will log the ID for further purposes.\n"
                             f"`USER:` [{check_user.first_name}](tg://user?id={check_user.id})"
@@ -179,8 +179,8 @@ async def ANTI_SPAMBOTS(welcm):
 
 
 CMD_HELP.update({
-    "anti_spambot":
-    "If enabled in config.env or env var,\n"
+    "antispambot":
+    "If enabled in config.env or environment variable, "
     "this module will ban (or inform the group admins) about "
     "the spammer(s) if they match the userbot's anti-spam algorithm."
 })

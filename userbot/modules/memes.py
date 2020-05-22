@@ -72,77 +72,77 @@ ZALG_LIST = [[
     " ͚",
     " ",
 ],
-             [
-                 " ̍",
-                 " ̎",
-                 " ̄",
-                 " ̅",
-                 " ̿",
-                 " ̑",
-                 " ̆",
-                 " ̐",
-                 " ͒",
-                 " ͗",
-                 " ͑",
-                 " ̇",
-                 " ̈",
-                 " ̊",
-                 " ͂",
-                 " ̓",
-                 " ̈́",
-                 " ͊",
-                 " ͋",
-                 " ͌",
-                 " ̃",
-                 " ̂",
-                 " ̌",
-                 " ͐",
-                 " ́",
-                 " ̋",
-                 " ̏",
-                 " ̽",
-                 " ̉",
-                 " ͣ",
-                 " ͤ",
-                 " ͥ",
-                 " ͦ",
-                 " ͧ",
-                 " ͨ",
-                 " ͩ",
-                 " ͪ",
-                 " ͫ",
-                 " ͬ",
-                 " ͭ",
-                 " ͮ",
-                 " ͯ",
-                 " ̾",
-                 " ͛",
-                 " ͆",
-                 " ̚",
-             ],
-             [
-                 " ̕",
-                 " ̛",
-                 " ̀",
-                 " ́",
-                 " ͘",
-                 " ̡",
-                 " ̢",
-                 " ̧",
-                 " ̨",
-                 " ̴",
-                 " ̵",
-                 " ̶",
-                 " ͜",
-                 " ͝",
-                 " ͞",
-                 " ͟",
-                 " ͠",
-                 " ͢",
-                 " ̸",
-                 " ̷",
-                 " ͡",
-             ]]
+[
+    " ̍",
+    " ̎",
+    " ̄",
+    " ̅",
+    " ̿",
+    " ̑",
+    " ̆",
+    " ̐",
+    " ͒",
+    " ͗",
+    " ͑",
+    " ̇",
+    " ̈",
+    " ̊",
+    " ͂",
+    " ̓",
+    " ̈́",
+    " ͊",
+    " ͋",
+    " ͌",
+    " ̃",
+    " ̂",
+    " ̌",
+    " ͐",
+    " ́",
+    " ̋",
+    " ̏",
+    " ̽",
+    " ̉",
+    " ͣ",
+    " ͤ",
+    " ͥ",
+    " ͦ",
+    " ͧ",
+    " ͨ",
+    " ͩ",
+    " ͪ",
+    " ͫ",
+    " ͬ",
+    " ͭ",
+    " ͮ",
+    " ͯ",
+    " ̾",
+    " ͛",
+    " ͆",
+    " ̚",
+],
+[
+    " ̕",
+    " ̛",
+    " ̀",
+    " ́",
+    " ͘",
+    " ̡",
+    " ̢",
+    " ̧",
+    " ̨",
+    " ̴",
+    " ̵",
+    " ̶",
+    " ͜",
+    " ͝",
+    " ͞",
+    " ͟",
+    " ͠",
+    " ͢",
+    " ̸",
+    " ̷",
+    " ͡",
+]]
 
 EMOJIS = [
     "😂",
@@ -176,7 +176,7 @@ EMOJIS = [
 ]
 
 INSULT_STRINGS = [
-    "Owww ... Such a stupid idiot.",
+    "Owww... Such a stupid idiot.",
     "Don't drink and type.",
     "I think you should go home or better a mental asylum.",
     "Command not found. Just like your brain.",
@@ -364,7 +364,7 @@ FACEREACTS = [
 RUNS_STR = [
     "Runs to Thanos..",
     "Runs far, far away from earth..",
-    "Running faster than Bolt coz i'mma userbot !!",
+    "Running faster than Bolt coz i'mma userbot!",
     "Runs to Marie..",
     "This Group is too cancerous to deal with.",
     "Cya bois",
@@ -374,13 +374,13 @@ RUNS_STR = [
     "I Fugged off!",
     "Will run for chocolate.",
     "I run because I really like food.",
-    "Running...\nbecause dieting is not an option.",
+    "Running...\nBecause dieting is not an option.",
     "Wicked fast runnah",
     "If you wanna catch me, you got to be fast...\nIf you wanna stay with me, you got to be good...\nBut if you wanna pass me...\nYou've got to be kidding.",
     "Anyone can run a hundred meters, it's the next forty-two thousand and two hundred that count.",
     "Why are all these people following me?",
     "Are the kids still chasing me?",
-    "Running a marathon...there's an app for that.",
+    "Running a marathon... there's an app for that.",
 ]
 
 CHASE_STR = [
@@ -436,7 +436,7 @@ CHASE_STR = [
 ]
 
 HELLOSTR = [
-    "Hi !",
+    "Hi!",
     "‘Ello, gov'nor!",
     "What’s crackin’?",
     "‘Sup, homeslice?",
@@ -676,12 +676,12 @@ async def who(event):
 
     except BaseException:
         await event.edit(
-            "`Can't slap this person, need to fetch some sticks and stones !!`"
+            "`Can't slap this person, need to fetch some sticks and stones!`"
         )
 
 
 async def slap(replied_user, event):
-    """ Construct a funny slap sentence !! """
+    """ Construct a funny slap sentence! """
     user_id = replied_user.id
     first_name = replied_user.first_name
     username = replied_user.username
@@ -743,13 +743,13 @@ async def facepalm(e):
 
 @register(outgoing=True, pattern="^.cry$")
 async def cry(e):
-    """ y u du dis, i cry everytime !! """
+    """ Y u du dis, i cry everytime! """
     await e.edit(choice(CRI))
 
 
 @register(outgoing=True, pattern="^.insult$")
 async def insult(e):
-    """ I make you cry !! """
+    """ I make you cry! """
     await e.edit(choice(INSULT_STRINGS))
 
 
@@ -909,7 +909,7 @@ async def shrugger(shg):
 
 @register(outgoing=True, pattern="^.chase$")
 async def police(chase):
-    """ Run boi run, i'm gonna catch you !! """
+    """ Run boi run, i'm gonna catch you! """
     await chase.edit(choice(CHASE_STR))
 
 
@@ -925,7 +925,7 @@ async def metoo(hahayes):
     await hahayes.edit(choice(METOOSTR))
 
 
-@register(outgoing=True, pattern="^.Oof$")
+@register(outgoing=True, pattern="^(Oof|oof)$")
 async def Oof(e):
     t = "Oof"
     for j in range(16):
@@ -933,16 +933,8 @@ async def Oof(e):
         await e.edit(t)
 
 
-@register(outgoing=True, pattern="^.oem$")
+@register(outgoing=True, pattern="^(Oem|oem)$")
 async def oem(e):
-    t = "Oem"
-    for j in range(16):
-        t = t[:-1] + "em"
-        await e.edit(t)
-
-
-@register(outgoing=True, pattern="^.Oem$")
-async def Oem(e):
     t = "Oem"
     for j in range(16):
         t = t[:-1] + "em"
@@ -1056,7 +1048,7 @@ async def let_me_google_that_for_you(lmgtfy_q):
 
 @register(pattern=r".scam(?: |$)(.*)", outgoing=True)
 async def scam(event):
-    """ Just a small command to fake chat actions for fun !! """
+    """ Just a small command to fake chat actions for fun! """
     options = [
         'typing', 'contact', 'game', 'location', 'voice', 'round', 'video',
         'photo', 'document', 'cancel'
@@ -1077,7 +1069,7 @@ async def scam(event):
         scam_action = str(args[0]).lower()
         scam_time = int(args[1])
     else:
-        await event.edit("`Invalid Syntax !!`")
+        await event.edit("`Invalid syntax!`")
         return
     try:
         if (scam_time > 0):
@@ -1115,70 +1107,72 @@ async def typewriter(typew):
 
 CMD_HELP.update({
     "memes":
-    ">`.cowsay`"
-    "\nUsage: cow which says things."
-    "\n\n>`:/`"
-    "\nUsage: Check yourself ;)"
-    "\n\n>`-_-`"
-    "\nUsage: Ok..."
-    "\n\n>`;_;`"
-    "\nUsage: Like `-_-` but crying."
-    "\n\n>`.cp`"
-    "\nUsage: Copypasta the famous meme"
-    "\n\n>`.vapor`"
-    "\nUsage: Vaporize everything!"
-    "\n\n>`.str`"
-    "\nUsage: Stretch it."
-    "\n\n>`.10iq`"
-    "\nUsage: You retard !!"
-    "\n\n>`.zal`"
-    "\nUsage: Invoke the feeling of chaos."
-    "\n\n>`Oem`"
-    "\nUsage: Oeeeem"
-    "\n\n>`Oof`"
-    "\nUsage: Ooooof"
-    "\n\n>`.fp`"
-    "\nUsage: Facepalm :P"
-    "\n\n>`.moon`"
-    "\nUsage: kensar moon animation."
-    "\n\n>`.clock`"
-    "\nUsage: kensar clock animation."
-    "\n\n>`.hi`"
-    "\nUsage: Greet everyone!"
-    "\n\n>`.coinflip <heads/tails>`"
-    "\nUsage: Flip a coin !!"
-    "\n\n>`.owo`"
-    "\nUsage: UwU"
-    "\n\n>`.react`"
-    "\nUsage: Make your userbot react to everything."
-    "\n\n>`.slap`"
-    "\nUsage: reply to slap them with random objects !!"
-    "\n\n>`.cry`"
-    "\nUsage: y u du dis, i cri."
-    "\n\n>`.shg`"
-    "\nUsage: Shrug at it !!"
-    "\n\n>`.run`"
-    "\nUsage: Let Me Run, run, RUNNN!"
-    "\n\n>`.chase`"
-    "\nUsage: You better start running"
-    "\n\n>`.metoo`"
-    "\nUsage: Haha yes"
-    "\n\n>`.mock`"
-    "\nUsage: Do it and find the real fun."
-    "\n\n>`.clap`"
-    "\nUsage: Praise people!"
-    "\n\n>`.f <emoji/character>`"
-    "\nUsage: Pay Respects."
-    "\n\n>`.bt`"
-    "\nUsage: Believe me, you will find this useful."
-    "\n\n>`.type`"
-    "\nUsage: Just a small command to make your keyboard become a typewriter!"
-    "\n\n>`.lfy <query>`"
-    "\nUsage: Let me Google that for you real quick !!"
-    "\n\n>`.decide [Alternates: (.yes, .no, .maybe)]`"
-    "\nUsage: Make a quick decision."
-    "\n\n>`.scam <action> <time>`"
-    "\n[Available Actions: (typing, contact, game, location, voice, round, video, photo, document, cancel)]"
-    "\nUsage: Create fake chat actions, for fun. (Default action: typing)"
-    "\n\n\nThanks to 🅱️ottom🅱️ext🅱️ot (@NotAMemeBot) for some of these."
+    "• `.cowsay`\n"
+    "Usage: Cow which says things.\n\n"
+    "• `:/`\n"
+    "Usage: Check yourself ;)\n\n"
+    "• `-_-`\n"
+    "Usage: Ok...\n\n"
+    "• `;_;`\n"
+    "Usage: Like `-_-` but crying.\n\n"
+    "• `.cp`\n"
+    "Usage: Copypaste the famous meme!\n\n"
+    "• `.vapor`\n"
+    "Usage: Vaporize everything!\n\n"
+    "• `.str`\n"
+    "Usage: Stretch it.\n\n"
+    "• `.10iq`\n"
+    "Usage: You retard!\n\n"
+    "• `.zal`\n"
+    "Usage: Invoke the feeling of chaos.\n\n"
+    "• `Oem`\n"
+    "Usage: Oeeeem!\n\n"
+    "• `Oof`\n"
+    "Usage: Ooooof!\n\n"
+    "• `.fp`\n"
+    "Usage: Facepalm :P\n\n"
+    "• `.moon`\n"
+    "Usage: Kensar moon animation.\n\n"
+    "• `.clock`\n"
+    "Usage: Kensar clock animation.\n\n"
+    "• `.hi`\n"
+    "Usage: Greet everyone!\n\n"
+    "• `.coinflip <heads/tails>`\n"
+    "Usage: Flip a coin!"
+    "• `.owo`\n"
+    "Usage: UwU!\n\n"
+    "• `.react`\n"
+    "Usage: Makes your userbot react to everything.\n\n"
+    "• `.slap`\n"
+    "Usage: Reply to slap them with random objects!\n\n"
+    "• `.cry`\n"
+    "Usage: Y u du dis, i cry.\n\n"
+    "• `.shg`\n"
+    "Usage: Shrug at it!"
+    "• `.run`\n"
+    "Usage: Let me run, run, RUNNN!\n\n"
+    "• `.chase`\n"
+    "Usage: You better start running...\n\n"
+    "• `.metoo`\n"
+    "Usage: Haha yes...\n\n"
+    "• `.mock`\n"
+    "Usage: Do it and find the real fun.\n\n"
+    "• `.clap`\n"
+    "Usage: Praise people!\n\n"
+    "• `.f <emoji/character>`\n"
+    "Usage: Pay respects.\n\n"
+    "• `.bt`\n"
+    "Usage: Believe me, you will find this useful.\n\n"
+    "• `.type`\n"
+    "Usage: Just a small command to make your keyboard become a typewriter!\n\n"
+    "• `.lfy <query>`\n"
+    "Usage: Let me Google that for you real quick!\n\n"
+    "• `.decide (Alternates: <`.yes`, `.no`, `.maybe`>)`\n"
+    "Usage: Make a quick decision.\n\n"
+    "• `.scam <action> <time>`\n"
+    "Usage: Create fake chat actions, for fun. (Default action: typing)\n"
+    "Available Actions: (typing, contact, game, location, voice, round, "
+    "video, photo, document, cancel)\n\n"
+    "Credit:\n"
+    "🅱️ottom🅱️ext🅱️ot (@NotAMemeBot)"
 })

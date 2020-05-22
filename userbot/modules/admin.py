@@ -237,9 +237,9 @@ async def ban(bon):
     # is done gracefully
     # Shout out the ID, so that fedadmins can fban later
     if reason:
-        await bon.edit(f"`{str(user.id)}` was banned !!\nReason: {reason}")
+        await bon.edit(f"`{str(user.id)}` was banned!\nReason: {reason}")
     else:
-        await bon.edit(f"`{str(user.id)}` was banned !!")
+        await bon.edit(f"`{str(user.id)}` was banned!")
     # Announce to the logging group if we have banned the person
     # successfully!
     if BOTLOG:
@@ -274,7 +274,7 @@ async def nothanos(unbon):
     try:
         await unbon.client(
             EditBannedRequest(unbon.chat_id, user.id, UNBAN_RIGHTS))
-        await unbon.edit("```Unbanned Successfully```")
+        await unbon.edit("```Unbanned successfully```")
 
         if BOTLOG:
             await unbon.client.send_message(
@@ -328,9 +328,9 @@ async def spider(spdr):
 
             # Announce that the function is done
             if reason:
-                await spdr.edit(f"`Safely taped !!`\nReason: {reason}")
+                await spdr.edit(f"`Safely taped!`\nReason: {reason}")
             else:
-                await spdr.edit("`Safely taped !!`")
+                await spdr.edit("`Safely taped!`")
 
             # Announce to logging group
             if BOTLOG:
@@ -376,7 +376,7 @@ async def unmoot(unmot):
         try:
             await unmot.client(
                 EditBannedRequest(unmot.chat_id, user.id, UNBAN_RIGHTS))
-            await unmot.edit("```Unmuted Successfully```")
+            await unmot.edit("```Unmuted successfully```")
         except UserIdInvalidError:
             return await unmot.edit("`Uh oh my unmute logic broke!`")
 
@@ -419,7 +419,7 @@ async def rm_deletedacc(show):
 
     con = show.pattern_match.group(1).lower()
     del_u = 0
-    del_status = "`No deleted accounts found, Group is clean`"
+    del_status = "`No deleted accounts found, this group is clean`"
 
     if con != "clean":
         await show.edit("`Searching for ghost/deleted/zombie accounts...`")
@@ -430,8 +430,8 @@ async def rm_deletedacc(show):
                 await sleep(1)
         if del_u > 0:
             del_status = (
-                f"`Found` **{del_u}** `ghost/deleted/zombie account(s) in this group,"
-                "\nclean them by using .zombies clean`"
+                f"`Found` **{del_u}** `ghost/deleted/zombie account(s) in this group, \n"
+                "clean them by using .zombies clean`"
             )
         return await show.edit(del_status)
 
@@ -466,8 +466,8 @@ async def rm_deletedacc(show):
         del_status = f"Cleaned **{del_u}** deleted account(s)"
 
     if del_a > 0:
-        del_status = (f"Cleaned **{del_u}** deleted account(s) "
-                      f"\n**{del_a}** deleted admin accounts are not removed"
+        del_status = (f"Cleaned **{del_u}** deleted account(s).\n"
+                      f"**{del_a}** deleted admin accounts are not removed"
         )
     await show.edit(del_status)
     await sleep(2)
@@ -476,7 +476,7 @@ async def rm_deletedacc(show):
     if BOTLOG:
         await show.client.send_message(
             BOTLOG_CHATID, "#CLEANUP\n"
-            f"Cleaned **{del_u}** deleted account(s) !!"
+            f"Cleaned **{del_u}** deleted account(s)!"
             f"\nCHAT: {show.chat.title}(`{show.chat_id}`)")
 
 
@@ -762,7 +762,7 @@ async def get_bots(show):
     mentions = f'<b>Bots in {title}:</b>\n'
     try:
         if isinstance(show.to_id, PeerChat):
-            return await show.edit("`I heard that only Supergroups can have bots.`")
+            return await show.edit("`I heard that only supergroups can have bots.`")
         else:
             async for user in show.client.iter_participants(
                     show.chat_id, filter=ChannelParticipantsBots):

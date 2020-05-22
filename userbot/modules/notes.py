@@ -57,8 +57,9 @@ async def add_note(fltr):
     if msg and msg.media and not string:
         if BOTLOG_CHATID:
             await fltr.client.send_message(
-                BOTLOG_CHATID, f"#NOTE\nCHAT ID: {fltr.chat_id}\nKEYWORD: {keyword}"
-                "\n\nThe following message is saved as the note's reply data for the chat, please do NOT delete it !!"
+                BOTLOG_CHATID, f"#NOTE\nCHAT ID: {fltr.chat_id}\nKEYWORD: {keyword}\n\n"
+                "The following message is saved as the note's reply data for the chat, "
+                "please **DON'T** delete it!"
             )
             msg_o = await fltr.client.forward_messages(entity=BOTLOG_CHATID,
                                                        messages=msg,
@@ -139,16 +140,16 @@ async def kick_marie_notes(kick):
 
 CMD_HELP.update({
     "notes":
-    "`#<notename>`"
-    "\nUsage: Gets the specified note."
-    "\n\n>`.save <notename> <notedata>` or reply to a message with >`.save <notename>`"
-    "\nUsage: Saves the replied message as a note with the notename. "
-    "(Works with pics, docs, and stickers too!)"
-    "\n\n>`.notes`"
-    "\nUsage: Gets all saved notes in a chat."
-    "\n\n>`.clear <notename>`"
-    "\nUsage: Deletes the specified note."
-    "\n\n>`.rmbotnotes <marie/rose>`"
-    "\nUsage: Removes all notes of admin bots"
-    " (Currently supported: Marie, Rose and their clones.) in the chat."
+    "• `#<notename>`\n"
+    "Usage: Gets the specified note.\n\n"
+    "• `.save <notename> <notedata>` or reply to a message with `.save <notename>`\n"
+    "Usage: Saves the replied message as a note with the notename. "
+    "(Works with pics, docs, and stickers too!)\n\n"
+    "• `.notes`\n"
+    "Usage: Gets all saved notes in a chat.\n\n"
+    "• `.clear <notename>`\n"
+    "Usage: Deletes the specified note.\n\n"
+    "• `.rmbotnotes <marie/rose>`\n"
+    "Usage: Removes all notes of admin bots"
+    " (currently supported: Marie, Rose, and their clones.) in the chat."
 })

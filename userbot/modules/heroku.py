@@ -45,10 +45,9 @@ async def variable(var):
                 if BOTLOG:
                     await var.client.send_message(
                         BOTLOG_CHATID, "#CONFIGVAR\n\n"
-                        "**ConfigVar**:\n"
-                        "`Config Variable`:\n"
+                        "Variable:\n"
                         f"`{variable}`\n"
-                        "`Value`:\n"
+                        "Value:\n"
                         f"`{heroku_var[variable]}`\n"
                     )
                     return await var.edit("`Received to BOTLOG_CHATID...`")
@@ -64,7 +63,6 @@ async def variable(var):
                     msg += f"`{item}` **=** `{configvars[item]}`\n"
                 await var.client.send_message(
                     BOTLOG_CHATID, "#CONFIGVARS\n\n"
-                    "**ConfigVars**:\n"
                     f"{msg}"
                 )
                 return await var.edit("`Received to BOTLOG_CHATID...`")
@@ -74,34 +72,32 @@ async def variable(var):
         await var.edit("`Setting information...`")
         variable = var.pattern_match.group(2)
         if not variable:
-            return await var.edit(">`.set var <ConfigVars-name> <value>`")
+            return await var.edit("Usage: `.set var <name> <value>`")
         value = var.pattern_match.group(3)
         if not value:
             variable = variable.split()[0]
             try:
                 value = var.pattern_match.group(2).split()[1]
             except IndexError:
-                return await var.edit(">`.set var <ConfigVars-name> <value>`")
+                return await var.edit("Usage: `.set var <name> <value>`")
         if variable in heroku_var:
             if BOTLOG:
                 await var.client.send_message(
                     BOTLOG_CHATID, "#SETCONFIGVAR\n\n"
-                    "**Set ConfigVar**:\n"
-                    "`Config Variable`:\n"
+                    "Variable:\n"
                     f"`{variable}`\n"
-                    "`Value`:\n"
+                    "Value:\n"
                     f"`{value}`\n\n"
                     "`Successfully changed...`"
                 )
-            await var.edit("`Information sets...`")
+            await var.edit("`Information set...`")
         else:
             if BOTLOG:
                 await var.client.send_message(
                     BOTLOG_CHATID, "#ADDCONFIGVAR\n\n"
-                    "**Add ConfigVar**:\n"
-                    "`Config Variable`:\n"
+                    "Variable:\n"
                     f"`{variable}`\n"
-                    "`Value`:\n"
+                    "Value:\n"
                     f"`{value}`\n\n"
                     "`Successfully added...`"
                 )
@@ -112,20 +108,19 @@ async def variable(var):
         try:
             variable = var.pattern_match.group(2).split()[0]
         except IndexError:
-            return await var.edit("`Specify ConfigVars you want to del...`")
+            return await var.edit("`Specify variable you want to delete...`")
         if variable in heroku_var:
             if BOTLOG:
                 await var.client.send_message(
                     BOTLOG_CHATID, "#DELCONFIGVAR\n\n"
-                    "**Delete ConfigVar**:\n"
-                    "`Config Variable`:\n"
+                    "Variable:\n"
                     f"`{variable}`\n\n"
                     "`Successfully deleted...`"
                 )
             await var.edit("`Information deleted...`")
             del heroku_var[variable]
         else:
-            return await var.edit("`Information don't exists...`")
+            return await var.edit("`Information not exists...`")
 
 
 @register(outgoing=True, pattern=r"^.usage(?: |$)")
@@ -133,7 +128,7 @@ async def dyno_usage(dyno):
     """
         Get your account Dyno Usage
     """
-    await dyno.edit("`Getting Information...`")
+    await dyno.edit("`Getting information...`")
     useragent = (
         'Mozilla/5.0 (Linux; Android 10; SM-G975F) '
         'AppleWebKit/537.36 (KHTML, like Gecko) '
@@ -184,12 +179,11 @@ async def dyno_usage(dyno):
 
             await dyno.edit(
                  "**Dyno Usage**:\n\n"
-                 f" -> `Dyno usage for`  **{app.name}**:\n"
-                 f"     •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
-                 f"**|**  [`{AppPercentage}`**%**]"
-                 "\n\n"
-                 " -> `Dyno hours quota remaining this month`:\n"
-                 f"     •  `{hours}`**h**  `{minutes}`**m**  "
+                 f"-> `Dyno usage for`  **{app.name}**:\n"
+                 f"    •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
+                 f"**|**  [`{AppPercentage}`**%**]\n\n"
+                 "-> `Dyno hours balance`:\n"
+                 f"    •  `{hours}`**h**  `{minutes}`**m**  "
                  f"**|**  [`{percentage}`**%**]"
             )
             return True
@@ -197,15 +191,15 @@ async def dyno_usage(dyno):
 
 CMD_HELP.update({
     "heroku":
-    ">.`usage`"
-    "\nUsage: Check your heroku dyno hours remaining"
-    "\n\n>`.set var <NEW VAR> <VALUE>`"
-    "\nUsage: add new variable or update existing value variable"
-    "\n!!! WARNING !!!, after setting a variable the bot will restarted"
-    "\n\n>`.get var or .get var <VAR>`"
-    "\nUsage: get your existing varibles, use it only on your private group!"
-    "\nThis returns all of your private information, please be caution..."
-    "\n\n>`.del var <VAR>`"
-    "\nUsage: delete existing variable"
-    "\n!!! WARNING !!!, after deleting variable the bot will restarted"
+    "• `.usage`\n"
+    "Usage: Check Heroku dyno hours balance.\n\n"
+    "• `.set var <name> <value>`\n"
+    "Usage: Add new variable or update existing variable value.\n"
+    "**WARNING**: After setting a variable, the bot will restarted.\n\n"
+    "• `.get var` or `.get var <name>`\n"
+    "Usage: Gets existing varibles. Use it only on private group!\n"
+    "This returns all of your private information, please be careful!\n\n"
+    "• `.del var <name>`\n"
+    "Usage: Deletes existing variable.\n"
+    "**WARNING**: After deleting variable, the bot will restarted."
 })

@@ -17,7 +17,7 @@ from userbot.events import register
 @register(outgoing=True, pattern="^.speed$")
 async def speedtst(spd):
     """ For .speed command, use SpeedTest to check server speeds. """
-    await spd.edit("`Running speed test . . .`")
+    await spd.edit("`Running speed test...`")
     test = Speedtest()
 
     test.get_best_server()
@@ -42,11 +42,11 @@ async def speedtst(spd):
 
 def speed_convert(size):
     """
-    Hi human, you can't read bytes?
+    Hi human, can you read bytes?
     """
     power = 2**10
     zero = 0
-    units = {0: '', 1: 'Kb/s', 2: 'Mb/s', 3: 'Gb/s', 4: 'Tb/s'}
+    units = {0: 'B/s', 1: 'KB/s', 2: 'MB/s', 3: 'GB/s', 4: 'TB/s'}
     while size > power:
         size /= power
         zero += 1
@@ -73,13 +73,13 @@ async def pingme(pong):
 
 
 CMD_HELP.update({
-     "speed":
-     ">`.speed`"
-     "\nUsage: Does a speedtest and shows the results.",
      "dc":
-     ">`.dc`"
-     "\nUsage: Finds the nearest datacenter from your server.",
+     "• `.dc`\n"
+     "Usage: Finds the nearest datacenter from your server.",
      "ping":
-     ">`.ping`"
-     "\nUsage: Shows how long it takes to ping your bot."
+     "• `.ping`\n"
+     "Usage: Shows how long it takes to ping your bot.",
+     "speed":
+     "• `.speed`\n"
+     "Usage: Performs a speed test and shows the result."
 })

@@ -50,9 +50,9 @@ async def on_snip_save(event):
     if msg and msg.media and not string:
         if BOTLOG_CHATID:
             await event.client.send_message(
-                BOTLOG_CHATID, f"#SNIP\nKEYWORD: {keyword}"
-                "\n\nThe following message is saved as the data for the snip, "
-                "please do NOT delete it !!"
+                BOTLOG_CHATID, f"#SNIP\nKEYWORD: {keyword}\n\n"
+                "The following message is saved as the data for the snip, "
+                "please **DON'T** delete it!"
             )
             msg_o = await event.client.forward_messages(
                 entity=BOTLOG_CHATID,
@@ -67,7 +67,7 @@ async def on_snip_save(event):
     elif event.reply_to_msg_id and not string:
         rep_msg = await event.get_reply_message()
         string = rep_msg.text
-    success = "`Snip {} successfully. Use` **${}** `anywhere to get it`"
+    success = "`Snip {} successfully. Use`  **${}**  `anywhere to get it`"
     if add_snip(keyword, string, msg_id) is False:
         await event.edit(success.format('updated', keyword))
     else:
@@ -94,9 +94,9 @@ async def on_snip_list(event):
     await event.edit(message)
 
 
-@register(outgoing=True, pattern=r"^.remsnip (\w*)")
+@register(outgoing=True, pattern=r"^.rmsnip (\w*)")
 async def on_snip_delete(event):
-    """ For .remsnip command, deletes a snip. """
+    """ For .rmsnip command, deletes a snip. """
     try:
         from userbot.modules.sql_helper.snips_sql import remove_snip
     except AttributeError:
@@ -110,13 +110,13 @@ async def on_snip_delete(event):
 
 CMD_HELP.update({
     "snips":
-    ">`$<snip_name>`"
-    "\nUsage: Gets the specified snip, anywhere."
-    "\n\n>`.snip <name> <data> or reply to a message with .snip <name>`"
-    "\nUsage: Saves the message as a snip (global note) with the name."
-    " (Works with pics, docs, and stickers too!)"
-    "\n\n>`.snips`"
-    "\nUsage: Gets all saved snips."
-    "\n\n>`.remsnip <snip_name>`"
-    "\nUsage: Deletes the specified snip."
+    "• `$<snip_name>`\n"
+    "Usage: Gets the specified snip, anywhere.\n"
+    "• `.snip <name> <data>` or reply to a message with `.snip <name>`\n"
+    "Usage: Saves the message as a snip (global note) with the name. "
+    "(Works with pics, docs, and stickers too!)\n\n"
+    "• `.snips`\n"
+    "Usage: Gets all saved snips\n\n."
+    "• `.rmsnip <snip_name>`\n"
+    "Usage: Deletes the specified snip."
 })

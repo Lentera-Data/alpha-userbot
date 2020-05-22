@@ -9,7 +9,7 @@ from importlib import import_module
 from sys import argv
 
 from telethon.errors.rpcerrorlist import PhoneNumberInvalidError
-from userbot import LOGS, bot
+from userbot import LOGS, BOT_VERSION, bot
 from userbot.modules import ALL_MODULES
 
 
@@ -26,7 +26,7 @@ except PhoneNumberInvalidError:
 for module_name in ALL_MODULES:
     imported_module = import_module("userbot.modules." + module_name)
 
-LOGS.info("You are running Alpha UserBot v1.0.6")
+LOGS.info(f"You are running Alpha UserBot v{BOT_VERSION}")
 LOGS.info("Test it by typing .alive on any chat.")
 
 if len(argv) not in (1, 3, 4):

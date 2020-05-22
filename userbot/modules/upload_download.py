@@ -80,7 +80,7 @@ async def download(target_file):
             except Exception as e:
                 LOGS.info(str(e))
         if downloader.isSuccessful():
-            await target_file.edit("Downloaded to `{}` successfully !!".format(
+            await target_file.edit("Downloaded to `{}` successfully!".format(
                 downloaded_file_name))
         else:
             await target_file.edit("Incorrect URL\n{}".format(url))
@@ -96,7 +96,7 @@ async def download(target_file):
         except Exception as e:  # pylint:disable=C0103,W0703
             await target_file.edit(str(e))
         else:
-            await target_file.edit("Downloaded to `{}` successfully !!".format(
+            await target_file.edit("Downloaded to `{}` successfully!".format(
                 downloaded_file_name))
     else:
         await target_file.edit(
@@ -174,7 +174,7 @@ async def uploadir(udir_event):
                 os.remove(single_file)
                 uploaded = uploaded + 1
         await udir_event.edit(
-            "Uploaded {} files successfully !!".format(uploaded))
+            "Uploaded {} files successfully!".format(uploaded))
     else:
         await udir_event.edit("404: Directory Not Found")
 
@@ -197,7 +197,7 @@ async def upload(u_event):
             progress_callback=lambda d, t: asyncio.get_event_loop(
             ).create_task(
                 progress(d, t, u_event, c_time, "[UPLOAD]", input_str)))
-        await u_event.edit("Uploaded successfully !!")
+        await u_event.edit("Uploaded successfully!")
     else:
         await u_event.edit("404: File Not Found")
 
@@ -255,7 +255,7 @@ def extract_w_h(file):
         return width, height
 
 
-@register(pattern=r".uploadas(stream|vn|all) (.*)", outgoing=True)
+@register(pattern=r".uploadas (stream|vn|all) (.*)", outgoing=True)
 async def uploadas(uas_event):
     """ For .uploadas command, allows you to specify some arguments for upload. """
     await uas_event.edit("Processing ...")
@@ -338,9 +338,9 @@ async def uploadas(uas_event):
                         progress(d, t, uas_event, c_time, "[UPLOAD]",
                                  file_name)))
             elif spam_big_messages:
-                return await uas_event.edit("TBD: Not (yet) Implemented")
+                return await uas_event.edit("TBD: Not (yet) implemented")
             os.remove(thumb)
-            await uas_event.edit("Uploaded successfully !!")
+            await uas_event.edit("Uploaded successfully!")
         except FileNotFoundError as err:
             await uas_event.edit(str(err))
     else:
@@ -349,8 +349,9 @@ async def uploadas(uas_event):
 
 CMD_HELP.update({
     "download":
-    ">`.download <link|filename> or reply to media`"
-    "\nUsage: Downloads file to the server."
-    "\n\n>`.upload <path in server>`"
-    "\nUsage: Uploads a locally stored file to the chat."
+    "• `.download <link|filename> or reply to media`\n"
+    "Usage: Downloads file to the server.",
+    "upload":
+    "• `.upload <path in server>`\n"
+    "Usage: Uploads a locally stored file to the chat."
 })

@@ -14,23 +14,35 @@ from pytz import timezone as tz
 
 from userbot import CMD_HELP, COUNTRY, TZ_NUMBER
 from userbot.events import register
+from os import remove
+
+
+async def format_text(con):
+    if len(con) == 2:
+        con = con.upper()
+        return con
+    else:
+        con = con.title()
+        if "(Uk)" in con:
+            con = con.replace("Uk", "UK")
+        if "(Us)" in con:
+            con = con.replace("Us", "US")
+        if " Of " in con:
+            con = con.replace(" Of ", " of ")
+        if "(Western)" in con:
+            con = con.replace("Western", "western")
+        if "Us Minor Outlying Islands" in con:
+            con = con.replace("Us Minor Outlying Islands",
+                              "US minor outlying islands")
+        if "Nl" in con:
+            con = con.replace("Nl", "NL")
+        if "The" in con:
+            con = con.replace("The", "the")
+        return con
 
 
 async def get_tz(con):
     """ Get time zone of the given country. """
-    if "(Uk)" in con:
-        con = con.replace("Uk", "UK")
-    if "(Us)" in con:
-        con = con.replace("Us", "US")
-    if " Of " in con:
-        con = con.replace(" Of ", " of ")
-    if "(Western)" in con:
-        con = con.replace("(Western)", "(western)")
-    if "Minor Outlying Islands" in con:
-        con = con.replace("Minor Outlying Islands", "minor outlying islands")
-    if "Nl" in con:
-        con = con.replace("Nl", "NL")
-
     for c_code in c_n:
         if con == c_n[c_code]:
             return c_tz[c_code]
@@ -39,6 +51,33 @@ async def get_tz(con):
             return c_tz[con]
     except KeyError:
         return
+
+
+async def con_func(condata):
+    cdata = []
+    cstring = ""
+    for c_id in c_n:
+        cdata.append(c_n[c_id])
+        cdata.sort(key=str.lower)
+    for i in cdata:
+        for c_code in c_n:
+            if i == c_n[c_code]:
+                cstring += f"{c_code} - {str(i)}\n"
+    string = (
+        "List of Available Countries\n\n"
+        f"{cstring}"
+    )
+    file = open("Countries.txt", "w+")
+    file.write(string)
+    file.close()
+    await condata.client.send_file(
+        condata.chat_id,
+        "Countries.txt",
+        caption="List of Available Countries"
+    )
+    remove("Countries.txt")
+    await condata.delete()
+    return
 
 
 @register(outgoing=True, pattern="^.time(?: |$)(.*)(?<![0-9])(?: |$)([0-9]+)?")
@@ -54,7 +93,12 @@ async def time_func(tdata):
     t_form = "%H:%M"
     c_name = None
 
-    if len(con) > 4:
+    if con == "Countries":
+        await con_func(tdata)
+        return
+
+    if con:
+        con = await format_text(con)
         try:
             c_name = c_n[con]
         except KeyError:
@@ -65,10 +109,12 @@ async def time_func(tdata):
         tz_num = TZ_NUMBER
         timezones = await get_tz(COUNTRY)
     else:
-        return await tdata.edit(f"`It's`  **{dt.now().strftime(t_form)}**  `here.`")
+        return await tdata.edit(f"It's **{dt.now().strftime(t_form)}** here.")
 
     if not timezones:
-        return await tdata.edit("`Invaild country.`")
+        return await tdata.edit(f"Invaild country:  `{con}`\n"
+                                "Get the list of available countries "
+                                "by typing `.time countries`")
 
     if len(timezones) == 1:
         time_zone = timezones[0]
@@ -77,14 +123,14 @@ async def time_func(tdata):
             tz_num = int(tz_num)
             time_zone = timezones[tz_num - 1]
         else:
-            return_str = f"`{c_name} has multiple timezones:`\n\n"
+            return_str = f"{c_name} has multiple timezones:\n\n"
 
             for i, item in enumerate(timezones):
                 return_str += f"`{i+1}. {item}`\n"
 
-            return_str += "\n`Choose one by typing the number "
-            return_str += "in the command.`\n"
-            return_str += f"`Example: .time {c_name} 2`"
+            return_str += "\nChoose one by typing the number "
+            return_str += "in the command.\n"
+            return_str += f"Example:  `.time {c_name} 2`"
 
             return await tdata.edit(return_str)
 
@@ -92,9 +138,9 @@ async def time_func(tdata):
 
     if c_name != COUNTRY:
         return await tdata.edit(
-            f"`It's`  **{dtnow}**  `in {c_name}({time_zone} timezone).`")
+            f"It's **{dtnow}** in  `{c_name} ({time_zone} timezone).`")
     elif COUNTRY:
-        return await tdata.edit(f"`It's`  **{dtnow}**  `here, in {COUNTRY}"
+        return await tdata.edit(f"It's **{dtnow}** here, in  `{COUNTRY} "
                                 f"({time_zone} timezone).`")
 
 
@@ -111,7 +157,12 @@ async def date_func(dat):
     d_form = "%d/%m/%y - %A"
     c_name = ''
 
-    if len(con) > 4:
+    if con == "Countries":
+        await con_func(dat)
+        return
+
+    if con:
+        con = await format_text(con)
         try:
             c_name = c_n[con]
         except KeyError:
@@ -122,10 +173,12 @@ async def date_func(dat):
         tz_num = TZ_NUMBER
         timezones = await get_tz(COUNTRY)
     else:
-        return await dat.edit(f"`It's`  **{dt.now().strftime(d_form)}**  `here.`")
+        return await dat.edit(f"It's **{dt.now().strftime(d_form)}** here.")
 
     if not timezones:
-        return await dat.edit("`Invaild country.`")
+        return await dat.edit(f"Invaild country:  `{con}`\n"
+                                "Get the list of available countries "
+                                "by typing `.date countries`")
 
     if len(timezones) == 1:
         time_zone = timezones[0]
@@ -134,14 +187,14 @@ async def date_func(dat):
             tz_num = int(tz_num)
             time_zone = timezones[tz_num - 1]
         else:
-            return_str = f"`{c_name} has multiple timezones:`\n"
+            return_str = f"{c_name} has multiple timezones:\n\n"
 
             for i, item in enumerate(timezones):
                 return_str += f"`{i+1}. {item}`\n"
 
-            return_str += "\n`Choose one by typing the number "
-            return_str += "in the command.`\n"
-            return_str += f"Example: .date {c_name} 2"
+            return_str += "\nChoose one by typing the number "
+            return_str += "in the command.\n"
+            return_str += f"Example:  `.date {c_name} 2`"
 
             return await dat.edit(return_str)
 
@@ -149,19 +202,21 @@ async def date_func(dat):
 
     if c_name != COUNTRY:
         return await dat.edit(
-            f"`It's`  **{dtnow}**  `in {c_name}({time_zone} timezone).`")
+            f"It's **{dtnow}** in  `{c_name} ({time_zone} timezone).`")
     elif COUNTRY:
-        return await dat.edit(f"`It's`  **{dtnow}**  `here, in {COUNTRY}"
+        return await dat.edit(f"It's **{dtnow}** here, in  `{COUNTRY} "
                               f"({time_zone} timezone).`")
 
 
 CMD_HELP.update({
     "time":
-    ">`.time <country name/code> <timezone number>`"
-    "\nUsage: Get the time of a country. If a country has "
-    "multiple timezones, it will list all of them and let you select one.",
+    "• `.time <country name> <timezone number>`\n"
+    "Usage: Gets the time of a country. If the country has multiple "
+    "timezones, it will list all of them and let you select one.\n"
+    "Note: Get the list of available countries by typing `.time countries`",
     "date":
-    ">`.date <country name/code> <timezone number>`"
-    "\nUsage: Get the date of a country. If a country has "
-    "multiple timezones, it will list all of them and let you select one."
+    "• `.date <country name> <timezone number>`\n"
+    "Usage: Gets the date of a country. If the country has multiple "
+    "timezones, it will list all of them and let you select one."
+    "Note: Get the list of available countries by typing `.date countries`"
 })

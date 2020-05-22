@@ -43,7 +43,7 @@ async def paste(pstl):
             message = message.message
 
     # Dogbin
-    await pstl.edit("`Pasting text . . .`")
+    await pstl.edit("`Pasting text...`")
     resp = post(DOGBIN_URL + "documents", data=message.encode('utf-8'))
 
     if resp.status_code == 200:
@@ -53,14 +53,13 @@ async def paste(pstl):
 
         if response['isUrl']:
             reply_text = ("`Pasted successfully!`\n\n"
-                          f"`Shortened URL:` {dogbin_final_url}\n\n"
-                          "`Original(non-shortened) URLs`\n"
-                          f"`Dogbin URL`: {DOGBIN_URL}v/{key}\n")
+                          f"`Shortened URL:` {dogbin_final_url}\n"
+                          f"`Original URL:` {message}")
         else:
             reply_text = ("`Pasted successfully!`\n\n"
                           f"`Dogbin URL`: {dogbin_final_url}")
     else:
-        reply_text = ("`Failed to reach Dogbin`")
+        reply_text = ("`Failed to reach dogbin`")
 
     await pstl.edit(reply_text)
     if BOTLOG:
@@ -90,7 +89,7 @@ async def get_dogbin_content(dog_url):
     elif message.startswith("del.dog/"):
         message = message[len("del.dog/"):]
     else:
-        return await dog_url.edit("`Is that even a dogbin url?`")
+        return await dog_url.edit("`Is that even a dogbin URL?`")
 
     resp = get(f'{DOGBIN_URL}raw/{message}')
 
@@ -109,8 +108,8 @@ async def get_dogbin_content(dog_url):
             str(RedirectsErr))
         return
 
-    reply_text = ("`Fetched dogbin URL content successfully!`"
-                  "\n\n`Content:` " + resp.text)
+    reply_text = ("`Fetched dogbin URL content successfully!`\n\n"
+                  "`Content:` " + resp.text)
 
     await dog_url.edit(reply_text)
     if BOTLOG:
@@ -122,8 +121,8 @@ async def get_dogbin_content(dog_url):
 
 CMD_HELP.update({
     "dogbin":
-    ">`.paste <text/reply>`"
-    "\nUsage: Create a paste or a shortened url using dogbin (https://del.dog/)"
-    "\n\n>`.getpaste`"
-    "\nUsage: Gets the content of a paste or shortened url from dogbin (https://del.dog/)"
+    "• `.paste <text/reply>`\n"
+    "Usage: Creates a paste or a shortened url using dogbin (https://del.dog/)\n\n"
+    "• `.getpaste`\n"
+    "Usage: Gets the content of a paste or shortened url from dogbin (https://del.dog/)"
 })

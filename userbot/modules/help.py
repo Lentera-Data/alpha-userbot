@@ -19,8 +19,12 @@ async def help(event):
         else:
             await event.edit("Please specify a valid module name.")
     else:
+        sdata = []
         string = ""
         for i in CMD_HELP:
+            sdata.append(i)
+            sdata.sort(key=str.lower)
+        for i in sdata:
             string += f"`{str(i)}`, "
         string = string[:-2]
         await event.edit(

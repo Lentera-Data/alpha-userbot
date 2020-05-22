@@ -17,7 +17,7 @@ from userbot.events import register
 
 # ========================= CONSTANTS ============================
 UNAPPROVED_MSG = (
-    "`Hello! This is an automated message.\n\n`"
+    "`HeYa! This is an automated message.\n\n`"
     "`I haven't approved you to PM yet.\n`"
     "`Please wait for me to look in, I mostly approve PMs.\n\n`"
     "`Until then, please don't spam my PM.\n`"
@@ -70,8 +70,9 @@ async def permitpm(event):
 
                 if COUNT_PM[event.chat_id] > 4:
                     await event.respond(
-                        "`You were spamming my Mastor's PM, which I didn't like.`\n"
-                        "`You have been BLOCKED and reported as SPAM, until further notice.`"
+                        "`You were spamming my PM, which I didn't like.`\n"
+                        "`You have been **BLOCKED** and reported as **SPAM**, `"
+                        "`until further notice.`"
                     )
 
                     try:
@@ -81,9 +82,9 @@ async def permitpm(event):
                         if BOTLOG:
                             await event.client.send_message(
                                 BOTLOG_CHATID,
-                                "Count PM is seemingly going retard, plis restart bot!",
+                                "Count PM is seemingly going retard, please restart the bot!",
                             )
-                        return LOGS.info("CountPM wen't rarted boi")
+                        return LOGS.info("CountPM wen't rarted boi...")
 
                     await event.client(BlockRequest(event.chat_id))
                     await event.client(ReportSpamRequest(peer=event.chat_id))
@@ -95,7 +96,7 @@ async def permitpm(event):
                             BOTLOG_CHATID,
                             "[" + name0 + "](tg://user?id=" +
                             str(event.chat_id) + ")" +
-                            " was just another retarded nibba",
+                            " was just another retarded nibba!",
                         )
 
 
@@ -191,7 +192,8 @@ async def approvepm(apprvpm):
     if BOTLOG:
         await apprvpm.client.send_message(
             BOTLOG_CHATID,
-            "#APPROVED\n" + "User: " + f"[{name0}](tg://user?id={uid})",
+            "#APPROVED\n" + "User: " + f"[{name0}](tg://user?id={uid})\n"
+            "Was approved to PM.",
         )
 
 
@@ -219,8 +221,8 @@ async def disapprovepm(disapprvpm):
     if BOTLOG:
         await disapprvpm.client.send_message(
             BOTLOG_CHATID,
-            f"[{name0}](tg://user?id={disapprvpm.chat_id})"
-            " was disapproved to PM you.",
+            "#DISAPPROVED\n" + "User: " + f"[{name0}](tg://user?id={disapprvpm.chat_id})\n"
+            "Was disapproved to PM.",
         )
 
 
@@ -251,7 +253,8 @@ async def blockpm(block):
     if BOTLOG:
         await block.client.send_message(
             BOTLOG_CHATID,
-            "#BLOCKED\n" + "User: " + f"[{name0}](tg://user?id={uid})",
+            "#BLOCKED\n" + "User: " + f"[{name0}](tg://user?id={uid})"
+            "Was blocc'd!",
         )
 
 
@@ -268,23 +271,23 @@ async def unblockpm(unblock):
     if BOTLOG:
         await unblock.client.send_message(
             BOTLOG_CHATID,
-            f"[{name0}](tg://user?id={replied_user.id})"
-            " was unblocc'd!.",
+            "#UNBLOCKED\n" + "User: " + f"[{name0}](tg://user?id={replied_user.id})\n"
+            "Was unblocc'd!",
         )
 
 
 CMD_HELP.update({
     "pmpermit":
-    ">`.approve`"
-    "\nUsage: Approves the mentioned/replied person to PM."
-    "\n\n>`.disapprove`"
-    "\nUsage: Disapproves the mentioned/replied person to PM."
-    "\n\n>`.block`"
-    "\nUsage: Blocks the person."
-    "\n\n>`.unblock`"
-    "\nUsage: Unblocks the person so they can PM you."
-    "\n\n>`.notifoff`"
-    "\nUsage: Clears/Disables any notifications of unapproved PMs."
-    "\n\n>`.notifon`"
-    "\nUsage: Allows notifications for unapproved PMs."
+    "• `.approve`\n"
+    "Usage: Approves the mentioned/replied person to PM.\n\n"
+    "• `.disapprove`\n"
+    "Usage: Disapproves the mentioned/replied person to PM.\n\n"
+    "• `.block`\n"
+    "Usage: Blocks the person.\n\n"
+    "• `.unblock`\n"
+    "Usage: Unblocks the person so they can PM you.\n\n"
+    "• `.notifoff`\n"
+    "Usage: Disables any notifications from unapproved PMs.\n\n"
+    "• `.notifon`\n"
+    "Usage: Enables any notifications from unapproved PMs."
 })
