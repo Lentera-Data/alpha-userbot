@@ -39,7 +39,7 @@ async def print_changelogs(event, ac_br, changelog):
     )
     if len(changelog_str) > 4096:
         await event.edit(
-            f"**NEW UPDATE** available for [{ac_br}]\n\n"
+            f"**NEW UPDATE** available for [**{ac_br}**]\n\n"
             "`Changelog is too big, view the file to see it.`"
         )
         file = open("CHANGELOG.txt", "w+")
@@ -53,8 +53,8 @@ async def print_changelogs(event, ac_br, changelog):
         remove("CHANGELOG.txt")
     else:
         await event.edit(
-            f"**NEW UPDATE** available for [{ac_br}]\n\n"
-            "**CHANGELOG:**\n`{changelog}`"
+            f"**NEW UPDATE** available for [**{ac_br}**]\n\n"
+            f"**CHANGELOG:**\n`{changelog}`"
         )
     return True
 
@@ -80,8 +80,8 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
         heroku_applications = heroku.apps()
         if HEROKU_APP_NAME is None:
             await event.edit(
-                "`[HEROKU]`\n`Please set up the` **HEROKU_APP_NAME** `variable"
-                " to be able to deploy your userbot...`"
+                "`[HEROKU]`\nPlease set up the **HEROKU_APP_NAME** "
+                "variable to be able to deploy your userbot..."
             )
             repo.__del__()
             return
@@ -179,10 +179,10 @@ async def upstream(event):
     if ac_br != UPSTREAM_REPO_BRANCH:
         await event.edit(
             "`[UPDATER]`\n"
-            f"Looks like you are using your own custom branch (**{ac_br}**). "
+            f"Looks like you are using your own custom branch [**{ac_br}**]. "
             "In that case, Updater is unable to identify "
             "which branch is to be merged. "
-            "Please checkout to any official branch`")
+            "Please checkout to any official branch.")
         return repo.__del__()
     try:
         repo.create_remote("upstream", off_repo)
@@ -208,7 +208,7 @@ async def upstream(event):
     if conf == "" and force_update is False:
         await print_changelogs(event, ac_br, changelog)
         return await event.respond(
-            "Do `.update now` or `.update deploy` to update.")
+            "Type  `.update now`  or  `.update deploy`  to update.")
 
     if force_update:
         await event.edit(
@@ -228,6 +228,6 @@ CMD_HELP.update({
     "Usage: Updates your userbot, "
     "if there are any updates in your userbot repository.\n\n"
     "• `.update deploy`\n"
-    "Usage: Deploy your userbot.\n"
+    "Usage: Deploy your new userbot repo.\n"
     "This will always triggered deploy, even no updates."
 })
