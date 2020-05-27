@@ -8,7 +8,7 @@
     "modular",
     "productivity"
   ],
-  "repository": "https://github.com/rulim34/userbot",
+  "repository": "https://github.com/Lentera-Data/alpha-userbot",
   "stack": "container",
   "env": {
     "API_KEY": {

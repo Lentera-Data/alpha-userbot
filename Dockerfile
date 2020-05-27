@@ -65,7 +65,7 @@ RUN python3 -m ensurepip \
 #
 # Clone repo and prepare working directory
 #
-RUN git clone -b master https://github.com/rulim34/userbot /home/userbot/
+RUN git clone -b master https://github.com/Lentera-Data/alpha-userbot /home/userbot/
 RUN mkdir /home/userbot/bin/
 WORKDIR /home/userbot/
 

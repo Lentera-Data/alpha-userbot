@@ -37,7 +37,7 @@ Deploy Alpha to Heroku:
 
 ## Credits
 
-Huge thanks to [everyone](https://github.com/rulim34/userbot/graphs/contributors) who have helped make this userbot awesome!!</p>
+Huge thanks to [everyone](https://github.com/Lentera-Data/alpha-userbot/graphs/contributors) who have helped make this userbot awesome!!</p>
 
 ### License
 
