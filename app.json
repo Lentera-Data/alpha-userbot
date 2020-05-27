@@ -153,8 +153,7 @@
     },
     "QUOTES_API_TOKEN": {
       "description": "Quotes API. Get this value from http://antiddos.systems.",
-      "value": "",
-      "required": true
+      "required": false
     },
     "LOGSPAMMER": {
       "description": "Stored error log in the bot log group, instead of spitting out the file in the current chat. Set this to True if you want (requires valid BOTLOG_CHATID).",
