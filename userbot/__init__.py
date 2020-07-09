@@ -213,7 +213,7 @@ with bot:
         quit(1)
 
 # Global Variables
-BOT_VERSION = "1.0.6"
+BOT_VERSION = "1.0.7"
 COUNT_MSG = 0
 USERS = {}
 COUNT_PM = {}
